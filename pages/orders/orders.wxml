@@ -1,0 +1,54 @@
+<view class="myOrder-wrap page" id="myOrder">
+  <view class="flex-box myOrder-tab-list">
+    <view class="flex-sub-box-5 active" data-index="0">全部订单</view>
+  </view>
+  <view class="myOrder-content-body lengthOneBody">
+    <view class="scrollContainer">
+      <view class="myOrder-all myOrder-content-container myOrder-ebusiness" lower-threshold="10" scroll-y="">
+        <view wx:if="{{orders}}">
+          <view wx:for="{{orders}}" wx:for-item="order" wx:key="order">
+            <view class="myOrder-list-wrap">
+              <view class="dialog-block-item">
+                <text>{{order.createDate}}</text>
+                <text wx:if="{{order.status == 'NOTPAID'}}" class="pull-right myOrder-order-status">待付款</text>
+                <text wx:if="{{order.status == 'CANCELLED'}}" class="pull-right myOrder-order-status">已取消</text>
+                <text wx:if="{{order.status == 'COMPLETED'}}" class="pull-right myOrder-order-status">已完成</text>
+              </view>
+              <view class="myOrder-goods-list">
+                <view>
+                  <view class="dialog-block-item">
+                    <image class="myOrder-goods-cover" src="{{serverurl}}{{order.product.image}}"></image>
+                    <view class="myOrder-goods-title">{{order.product.name}}</view>
+                    <view class="myOrder-goods-right">
+                      <view>¥
+                        <text class="myOrder-goods-price">{{order.product.price}}</text>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+              <view class="dialog-block-item myOrder-total-item">
+                <text>卖方微信号：{{order.releaseUser.wechatCode}}</text>
+              </view>
+              <view class="myOrder-list-bottom">
+                <form bindsubmit="cancelOrder">
+                  <input hidden="true" name="code" type="text" value="{{order.code}}"></input>
+                  <button wx:if="{{order.status == 'NOTPAID'}}" class="btn myOrder-cancel-order" form-type="submit">
+                    取消订单
+                  </button>
+                </form>
+                <form bindsubmit="payOrder">
+                  <input hidden="true" name="code" type="text" value="{{order.code}}"></input>
+                  <button wx:if="{{order.status == 'NOTPAID'}}" class="btn btn-orange myOrder-pay-directly" form-type="submit">
+                    支付
+                  </button>
+                </form>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="noMoreNewDataTip">已经没有新数据了</view>
+      </view>
+    </view>
+  </view>
+</view>

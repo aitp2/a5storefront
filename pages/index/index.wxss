@@ -1,0 +1,36 @@
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.goods-current-price {
+  color: #ff7100;
+  display: inline-block;
+  vertical-align: middle;
+  width:200px;
+  height:50px;
+}
+
+.promotionPrice{
+text-decoration:line-through;
+width:200px;
+height:30px;
+line-height:30px;
+}

@@ -1,0 +1,45 @@
+<!--account.wxml-->
+<view class="app">
+  <view class="ele-container">
+    <view class="user-center usercenter-mode1 background-ele with-horizontal-view" style="opacity:1;color:rgb(255, 255, 255);margin-top:0;font-size:18px;height:auto;margin-left:auto;">
+      <block wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+        <view class="show-view" style="background-image:url(http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/top_bg.jpg)">
+          <label class="empty-span"></label>
+          <image class="cover-thumb" src="http://img.zhichiwangluo.com/zc_app_default_photo.png"></image>
+          <label class="nickname">用户名</label>
+          <label class="ico-moon icon-rightarrow"></label>
+        </view>
+      </block>
+
+      <block wx:else>
+        <navigator url="../profile/profile">
+          <view class="show-view" style="background-image:url(http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/top_bg.jpg)">
+            <label class="empty-span"></label>
+            <image class="cover-thumb" src="{{userInfo.avatarUrl || 'http://img.zhichiwangluo.com/zc_app_default_photo.png'}}"></image>
+            <label class="nickname">{{userInfo.nickName || '用户名'}}</label>
+            <label class="ico-moon icon-rightarrow"></label>
+          </view>
+        </navigator>
+      </block>
+
+      <view class="horizontal-view">
+        <view class="horizontal-router-container1">
+          <view style="margin-top: -1px">
+            <navigator url="../orders/orders">
+              <label class="ico-moon icon-notebook"></label>
+              <text>我的订单</text>
+              <label class="ico-moon icon-rightarrow"></label>
+            </navigator>
+          </view>
+          <view style="margin-top: -1px">
+            <navigator url="../releasedProducts/releasedProducts">
+              <label class="ico-moon icon-location"></label>
+              <text>我发布的</text>
+              <label class="ico-moon icon-rightarrow"></label>
+            </navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

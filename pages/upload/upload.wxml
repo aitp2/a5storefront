@@ -1,0 +1,69 @@
+<view class="app">
+  <view class="ele-container">
+    <form bindsubmit="uploadProduct" class="element form-vessel" style="background-color:rgba(0,0,0,0);opacity:1;margin-left:auto;">
+      <view class="ele-container">
+        <view class="element upload-img js-form-ele" style="margin-left:130px;margin-top:0;line-height:80px;margin-right:auto;width:60px;height:80px;">
+          <block wx:if="{{image}}">
+            <image class="plus-div" catchtap="uploadFormImg" src="{{image}}" mode="aspectFit" vaue="{{image}}"></image>
+          </block>
+          <view catchtap="uploadFormImg" class="plus-div">
+            <text>+</text>
+          </view>
+        </view>
+      </view>
+      <view class="ele-container">
+        <view class="element input-ele js-form-ele" style="margin-left:35px;margin-top:0;margin-right:auto;width:250px;height:35x;opacity:1">
+          <input bindchange="name" placeholder="宝贝名称" type="text" name="name" value="{{name}}">
+          </input>
+        </view>
+      </view>
+      <view class="ele-container">
+        <view class="element input-ele-des js-form-ele" style="margin-left:35px;margin-top:0;margin-right:auto;width:250px;height:35x;opacity:1">
+          <input bindchange="description" placeholder="宝贝描述" type="text" name="description" value="{{description}}">
+          </input>
+        </view>
+      </view>
+      <view class="ele-container">
+        <view class="element input-ele js-form-ele" style="margin-left:35px;margin-top:0;margin-right:auto;width:250px;height:35x;opacity:1">
+          <input bindchange="originalPrice" placeholder="宝贝原价" type="text" name="originalPrice" value="{{originalPrice}}">
+          </input>
+        </view>
+      </view>
+      <view class="ele-container">
+        <view class="element input-ele js-form-ele" style="margin-left:35px;margin-top:0;margin-right:auto;width:250px;height:35x;opacity:1">
+          <input bindchange="price" placeholder="宝贝售价" type="text" name="price" value="{{price}}">
+          </input>
+        </view>
+      </view>
+      <view class="ele-container">
+        <view class="element select-ele js-form-ele" style="background-color:rgba(0,0,0,0);margin-top:10px;line-height:35px;opacity:1;margin-left:35px;margin-right:auto;width:250px;height:NANrpx;color:rgb(189, 189, 189);font-size:14px;">
+          <view class="select-container">
+            <label class="title-container" style="color:rgb(151, 151, 151);font-size:14px;background-color:rgb(248, 248, 248);line-height:30px;margin-left:auto;">
+              <text class="title">是否实物</text>
+            </label>
+            <radio-group bindchange="platformKeeping" class="radio-group">
+              <view class="select-item">
+                <label class="select-content checkbox">
+                  <label class="select-text">是</label>
+                  <radio class="select-input" value="true" checked="true">
+                  </radio>
+                </label>
+              </view>
+              <view class="select-item">
+                <label class="select-content checkbox">
+                  <label class="select-text">否</label>
+                  <radio class="select-input" value="false">
+                  </radio>
+                </label>
+              </view>
+            </radio-group>
+          </view>
+        </view>
+      </view>
+      <view class="ele-container">
+        <button class="button background-ele" form-type="submit" style="background-color:rgb(238, 87, 85);border-color:rgb(34, 34, 34);border-radius:50px;border-style:none;color:rgb(255, 255, 255);font-size:16px;height:35px;line-height:35px;margin-left:auto;margin-right:auto;margin-top:15px;opacity:1;text-align:center;width:100px;">
+          提交 </button>
+      </view>
+    </form>
+  </view>
+</view>
