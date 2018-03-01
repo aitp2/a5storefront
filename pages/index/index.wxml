@@ -7,7 +7,7 @@
       <block wx:for="{{products}}" wx:for-item="product" wx:key="product">
         
             <view class="goods-list-item background-ele router js-to-detail" style="height:246px;margin-left:auto;">
-            <navigator url="../productDetail/productDetail?productCode={{product.code}}">
+            <navigator url="../productDetail/productDetail?productCode={{product.code}}&pOpenid={{product.openId}}">
               <view class="inner-content">
                 <image class="list-img" mode="scaleToFill" src="{{serverurl}}{{product.image}}" style="width:175px;height:175px;margin-left:auto;"></image>
                 <view class="title-container" style="width: 187px;margin-left: 15px;">

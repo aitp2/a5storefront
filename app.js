@@ -5,7 +5,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    wx.setStorageSync("serverurl", "https://www.transa5.tech")
+    wx.setStorageSync("serverurl", "http://localhost:8080")
 
     // 获取用户信息
     wx.getSetting({

@@ -9,6 +9,7 @@
         </swiper>
       </view>
       <view class="goods-header">
+        <view class="goods-title">浏览次数:{{product.viewNum}}</view>
         <view class="goods-title">产品名称:{{product.name}}</view>
         <view class="goods-price">
           <view class="goods-current-price">
@@ -17,6 +18,22 @@
             <text style="font-weight:bold; font-size:20px;">现价:¥{{product.price}}</text>
           </view>
         </view>
+      </view>
+       <view wx:if="{{checkCollect == false}}">
+       <form bindsubmit="addCollect">
+        <input hidden="true" name="productOpenId" type="text" value="{{product.openId}}"></input>
+        <view>
+          <button class="btn btn-orange buy-goods-directly" form-type="submit">关注卖方</button>
+        </view>
+        </form>
+       </view>
+       <view wx:if="{{checkCollect == true}}">
+       <form bindsubmit="removeCollect">
+        <input hidden="true" name="productOpenId" type="text" value="{{product.openId}}"></input>
+        <view>
+          <button class="btn btn-orange buy-goods-directly" form-type="submit">取消关注</button>
+        </view>
+        </form>
       </view>
     </view>
     <view style="padding: 10px;text-align:center;background:#f4f4f4;color:#b2b2b2;font-size:12px;" hidden="">

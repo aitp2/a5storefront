@@ -38,6 +38,13 @@
               <label class="ico-moon icon-rightarrow"></label>
             </navigator>
           </view>
+          <view style="margin-top: -1px">
+            <navigator url="../collector/collector">
+              <label class="ico-moon icon-location"></label>
+              <text>我关注的</text>
+              <label class="ico-moon icon-rightarrow"></label>
+            </navigator>
+          </view>
         </view>
       </view>
     </view>

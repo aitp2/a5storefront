@@ -1,6 +1,14 @@
 // pages/productDetail/productDetail.js
 Page({
 
+  onShareAppMessage: function () {
+    return {
+      title: '产品分享',
+      desc: '',
+      path: '/page/productDetail?id=123'
+    }
+  },
+
   /**
    * 页面的初始数据
    */
@@ -14,6 +22,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     var serverurl = wx.getStorageSync("serverurl"); 
+    var openId = wx.getStorageSync("openId");
     wx.request({
       method: "POST",
       url: serverurl + '/getProduct',
@@ -25,11 +34,26 @@ Page({
         var datas = res.data;
         that.setData({
           product: datas,
-          serverurl: serverurl
+          serverurl: serverurl,
         })
       },
       fail: function (res) {
         console.log('error:' + res);
+      }
+    }),
+    wx.request({
+      method: "POST",
+      url: serverurl + '/checkCollector',
+      data: {
+        'openId': openId,
+        'collectOpenId': options.pOpenid
+      },
+      header: { 'content-type': 'application/x-www-form-urlencoded' },
+      success: function (res) {
+        var data = res.data;
+        that.setData({
+          checkCollect: data
+        })
       }
     })
   },
@@ -56,6 +80,68 @@ Page({
                   url: '../orders/orders',
                 })
               }, 1000)
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+
+  addCollect: function (e) {
+    var that = this;
+    var openId = wx.getStorageSync("openId");
+    var productOpenId = e.detail.value.productOpenId;
+    var serverurl = wx.getStorageSync("serverurl");
+    wx.showModal({
+      title: '提示',
+      content: '您确定关注卖家吗？',
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            method: "POST",
+            url: serverurl + '/addCollector',
+            data: {
+              'openId': openId,
+              'collectOpenId': productOpenId
+            },
+            header: { 'content-type': 'application/x-www-form-urlencoded' },
+            success: function (res) {
+              that.setData({
+                checkCollect: true
+              })
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+
+  removeCollect: function (e) {
+    var that = this;
+    var openId = wx.getStorageSync("openId");
+    var productOpenId = e.detail.value.productOpenId;
+    var serverurl = wx.getStorageSync("serverurl");
+    wx.showModal({
+      title: '提示',
+      content: '您确定取消卖家关注吗？',
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            method: "POST",
+            url: serverurl + '/removeCollector',
+            data: {
+              'openId': openId,
+              'collectOpenId': productOpenId
+            },
+            header: { 'content-type': 'application/x-www-form-urlencoded' },
+            success: function (res) {
+              that.setData({
+                checkCollect: false
+              })
             }
           })
         } else if (res.cancel) {

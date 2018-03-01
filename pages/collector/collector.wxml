@@ -1,0 +1,27 @@
+<view class="myOrder-wrap page" id="myCollector">
+  <view class="flex-box myOrder-tab-list">
+    <view class="flex-sub-box-5 active"data-index="0">我关注的</view>
+  </view>
+  <view class="myOrder-content-body lengthOneBody">
+    <view class="scrollContainer">
+      <view class="myOrder-all myOrder-content-container myOrder-ebusiness" lower-threshold="10" scroll-y="">
+      <view wx:if="{{collectors}}">
+      <view wx:for="{{collectors}}" wx:for-item="collector" wx:key="collector">
+        <view class="myOrder-list-wrap">
+          <view class="myOrder-goods-list">
+            <view>
+              <view class="dialog-block-item">
+                <view class="myOrder-goods-title">{{collector.name}}</view>
+                <view class="myOrder-goods-title">{{collector.mobileNum}}</view>
+                <view class="myOrder-goods-title">{{collector.project}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        </view>
+        <view class="noMoreNewDataTip">已经没有新数据了</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
