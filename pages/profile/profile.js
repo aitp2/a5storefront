@@ -4,64 +4,49 @@ Page({
 
   /**
    * 页面的初始数据
-   */
-  data: {
-    
+   */ 
+  data: { 
+    user: wx.getStorageSync("wechatUser")
   },
 
   /**
    * 生命周期函数--监听页面加载
-   */
+   */ 
   onLoad: function (options) {
     var that = this;
-    var openId = wx.getStorageSync("openId");
-    var serverurl = wx.getStorageSync("serverurl");
-    wx.request({
-      method: 'GET',
-      url: serverurl + '/getUserInfo',
-      data:{
-        'openId': openId
-      },
-      header: { 'content-type': 'application/json' },
-      success: function(res){
-        var data = res.data;
-        that.setData({
-          user : data
-        })
-      },
-      fail : function(res){
-        console.log('error:' + res);
-      }
-    }),
-    
-    this.setData({
-      userInfo: app.globalData.userInfo,
-      openId: wx.getStorageSync("openId")
-    })
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        openId: wx.getStorageSync("openId")
+      })
   },
 
   saveUserInfo : function(e){
     var that = this;
+    var serverurl_api = wx.getStorageSync("serverurl-api");
+
     var openId = wx.getStorageSync("openId");
     var serverurl = wx.getStorageSync("serverurl");
-    var name = e.detail.value.name;
+    var userName = e.detail.value.userName;
     var mobileNum = e.detail.value.mobileNum;
     var project = e.detail.value.project;
     var seat = e.detail.value.seat;
     var wechatCode = e.detail.value.wechatCode;
     wx.request({
-      method : 'GET',
-      url: serverurl + '/updateUserInfo',
+      method : 'PUT',
+      url: serverurl_api + '/api/wechat-users',
       data: {
+        'id': this.data.user.id,
         'openId': openId,
-        'name' : name,
+        'userName': userName,
         'mobileNum' : mobileNum,
         'project':project,
         'seat':seat,
         'wechatCode': wechatCode
       },
       header: { 'content-type': 'application/json' },
-      success:function(res){
+      success:function(res){ 
+        that.data.user=res.data;
+        console.log(JSON.stringify(that.data.user));
         wx.switchTab({
           url: "../account/account",
         })

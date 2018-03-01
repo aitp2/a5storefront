@@ -9,8 +9,8 @@
     <view class="centerPage-user-info">
       <view class="centerPage-info-item">
         <label>姓名</label>
-        <input class="userCenter-tel" placeholder="请输入您的名字" value="{{user.name}}" name="name"/>
-      </view>
+        <input class="userCenter-tel" placeholder="请输入您的名字" value="{{user.userName}}" name="userName"/> 
+      </view>  
       <view class="centerPage-info-item">
         <label>手机号</label>
         <input class="userCenter-tel" placeholder="请输入您的手机号" value="{{user.mobileNum}}" name="mobileNum" />

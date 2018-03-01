@@ -10,6 +10,7 @@ Page({
   onLoad: function () {
     var that = this;
     var serverurl = wx.getStorageSync("serverurl");
+    var serverurl_api = wx.getStorageSync("serverurl-api");
     wx.login({
       success: res => {
         var code = res.code;
@@ -18,12 +19,13 @@ Page({
             success: function (e) {
               app.globalData.userInfo = e.userInfo,
                 wx.request({
-                url: serverurl + '/getOpenId',
-                  data: {
-                    code: code
+                method: "PUT", 
+                url: serverurl_api + '/api/wechat-users/code/'+code,
+                  data: { 
                   },
                   success: function (res) {
-                    wx.setStorageSync("openId", res.data);
+                    wx.setStorageSync("openId", res.data.openId);
+                    wx.setStorageSync("wechatUser", res.data)
                   }
                 })
               that.setData({
@@ -36,22 +38,22 @@ Page({
       }
     })
     wx.request({
-      method : "POST",
-      url: serverurl + '/showProducts',
-      data:{
+      method : "GET",
+      url: serverurl_api + '/api/wechat-products',
+      data:{ 
 
       },
       header: { 'content-type': 'application/x-www-form-urlencoded' },
       success:function(res){
         var datas = res.data;
         that.setData({
-          products : datas,
-          serverurl: serverurl
+          products : datas,  
+          serverurl: serverurl  
         })
       },
       fail:function(res){
         console.log('error:' + res);
-      }
+      } 
     })
   },
 
@@ -61,20 +63,22 @@ Page({
   onShow: function () {
     var that = this;
     var serverurl = wx.getStorageSync("serverurl");
+    var serverurl_api = wx.getStorageSync("serverurl-api");
     wx.login({
       success: res => {
         var code = res.code;
+        console.log(res);
         if (res.code) {
           wx.getUserInfo({
             success: function (e) {
               app.globalData.userInfo = e.userInfo,
                 wx.request({
-                  url: serverurl + '/getOpenId',
+                  method: "PUT", 
+                  url: serverurl_api + '/api/wechat-users/code/' + code,
                   data: {
-                    code: code
-                  },
+                  }, 
                   success: function (res) {
-                    wx.setStorageSync("openId", res.data);
+                    wx.setStorageSync("openId", res.data.openId);
                   }
                 })
               that.setData({
@@ -87,8 +91,8 @@ Page({
       }
     })
     wx.request({
-      method: "POST",
-      url: serverurl + '/showProducts',
+      method: "GET",
+      url: serverurl_api + '/api/wechat-products',
       data: {
 
       },
@@ -106,3 +110,4 @@ Page({
     })
   },
 })
+  
