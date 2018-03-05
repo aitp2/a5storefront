@@ -13,7 +13,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    tabs: ["产品列表", "留言信息"],
+    activeIndex: 0,
+    sliderOffset: 1    
   },
   
   /**
@@ -56,8 +58,22 @@ Page({
         })
       }
     })
-  },
 
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+        });
+      }
+    });
+  },
+  tabClick: function (e) {
+    this.setData({
+      sliderOffset: e.currentTarget.offsetLeft,
+      activeIndex: e.currentTarget.id
+    });
+  },
   buyProduct : function(e){
     var openId = wx.getStorageSync("openId");
     var productCode = e.detail.value.code;

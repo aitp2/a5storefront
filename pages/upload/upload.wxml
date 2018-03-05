@@ -11,6 +11,39 @@
           </view>
         </view>
       </view>
+
+      <view class="ele-container">
+    <view class="page__bd">
+        <view class="weui-cells">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <view class="weui-uploader">                        
+                        <view class="weui-uploader__bd">
+                            <view class="weui-uploader__files" id="uploaderFiles">
+                                <block wx:for="{{files}}" wx:key="*this">
+                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                    </view>
+                                </block>   
+                                
+                            </view>
+                            <view class="weui-uploader__input-box">
+                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>	
+
+      </view>
+
+
+
+
+
+
       <view class="ele-container">
         <view class="element input-ele js-form-ele" style="margin-left:35px;margin-top:0;margin-right:auto;width:250px;height:35x;opacity:1">
           <input bindchange="name" placeholder="宝贝名称" type="text" name="name" value="{{name}}">

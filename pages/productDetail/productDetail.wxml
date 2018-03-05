@@ -45,6 +45,152 @@
           <view class="wxParse-inline" style="undefined">{{product.description}}</view>
         </view>
       </view>
+
+      <view class="page">
+    <view class="page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar navbar-head">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+            </view>
+            <view class="weui-tab__panel">
+
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                  
+                  <view class="page">  
+    <view class="page__bd">
+                  <view class="weui-panel weui-panel_access">            
+            <view class="weui-panel__bd">
+                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4146133394,2964397613&fm=27&gp=0.jpg" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">标题一</view>
+                        <view class="weui-media-box__desc">叫做星球。星球有一定的形状……</view>
+                    </view>
+                </navigator>
+                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4146133394,2964397613&fm=27&gp=0.jpg" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">标题二</view>
+                        <view class="weui-media-box__desc">由各种物质组成的巨型球状天体</view>
+                    </view>
+                </navigator>
+                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4146133394,2964397613&fm=27&gp=0.jpg" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">标题二</view>
+                        <view class="weui-media-box__desc">由各种物质组成的巨型球状天体</view>
+                    </view>
+                </navigator>
+                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4146133394,2964397613&fm=27&gp=0.jpg" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">标题二</view>
+                        <view class="weui-media-box__desc">由各种物质组成的巨型球状天体</view>
+                    </view>
+                </navigator>
+            </view>
+            <view class="weui-panel__ft">
+                <view class="weui-cell weui-cell_access weui-cell_link">
+                    <view class="weui-cell__bd bd_right">查看更多</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </view>
+            </view>
+        </view>
+        </view>
+        </view>
+
+                </view>
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <image src="http://img1.imgtn.bdimg.com/it/u=2291692025,1912539770&fm=27&gp=0.jpg" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">是否有保修卡，购买发票？</view>
+                <view class="weui-cell__ft"></view>
+            </view>
+            <view class="weui-cell">                
+                <view class="weui-cell__bd"></view>
+                <view class="weui-cell__ft">
+                    <image src="http://img1.imgtn.bdimg.com/it/u=2291692025,1912539770&fm=27&gp=0.jpg" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__ft">回复信息1</view>
+            </view>
+            <view class="weui-cell">                
+                <view class="weui-cell__bd"></view>
+                <view class="weui-cell__ft">
+                    <image src="http://img1.imgtn.bdimg.com/it/u=2291692025,1912539770&fm=27&gp=0.jpg" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__ft">回复信息2</view>
+            </view>
+            <view class="weui-cell">                
+                <view class="weui-cell__bd"></view>
+                <view class="weui-cell__ft">
+                    <image src="http://img1.imgtn.bdimg.com/it/u=2291692025,1912539770&fm=27&gp=0.jpg" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__ft">回复信息3</view>
+            </view>
+
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <image src="http://img1.imgtn.bdimg.com/it/u=2291692025,1912539770&fm=27&gp=0.jpg" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">商品是否存在修改过？</view>
+                <view class="weui-cell__ft"></view>
+            </view>
+            <view class="weui-cell">                
+                <view class="weui-cell__bd"></view>
+                <view class="weui-cell__ft">
+                    <image src="http://img1.imgtn.bdimg.com/it/u=2291692025,1912539770&fm=27&gp=0.jpg" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__ft">没有修改过，8成新</view>
+            </view>
+
+        
+        <view class="weui-cells__title">回复内容</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" />
+                    <view class="weui-textarea-counter">0/200</view>
+                </view>
+            </view>
+        </view>
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" bindtap="showTopTips">留言</button>
+        </view>
+        
+        </view>                 
+                </view>
+
+<!--
+                <view class="weui-tab__content" hidden="{{activeIndex != 2}}">选项三的内容</view>
+-->
+
+
+            </view>
+        </view>        
+
+    </view>
+</view>
+
+
+
+
     </view>
     <view wx:if="{{!product.isSellOut}}" class="goods-bottom-opt">
     <form bindsubmit="buyProduct">
