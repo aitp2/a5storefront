@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    
+    serverurl_api: wx.getStorageSync("serverurl-api")
   },
   
   onLoad: function () {

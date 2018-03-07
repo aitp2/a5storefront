@@ -29,13 +29,13 @@ Page({
     })
   },
 
-  name:function(e){
-      var that=this;
-      that.setData({
-        name: e.detail.value
-      })
+  name: function (e) {
+    var that = this;
+    that.setData({
+      name: e.detail.value
+    })
   },
-  description:function(e){
+  description: function (e) {
     var that = this;
     that.setData({
       description: e.detail.value
@@ -59,7 +59,7 @@ Page({
       platformKeeping: e.detail.value
     })
   },
-  image : function(e){
+  image: function (e) {
     var that = this;
     that.setData({
       image: e.detail.value
@@ -70,24 +70,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
-  uploadFormImg:function(){
+  uploadFormImg: function () {
     var that = this;
     wx.chooseImage({
       count: 1,
@@ -102,50 +102,38 @@ Page({
     })
   },
 
-  uploadProduct:function(e){
+  uploadProduct: function (e) {
     var that = this;
-    var openId = wx.getStorageSync("openId");
+    var wechatUserId = wx.getStorageSync("wechatUser").id;
     var serverurl = wx.getStorageSync("serverurl");
+    var serverurl_api = wx.getStorageSync("serverurl-api");
     var image = that.data.image;
     var name = that.data.name;
     var description = that.data.description;
     var originalPrice = that.data.originalPrice;
     var price = that.data.price;
     var platformKeeping = that.data.platformKeeping ? that.data.platformKeeping : true;
-    wx.uploadFile({
-      url: serverurl + '/upload/picture',
-      filePath: image,
-      name: 'file',
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      formData:{
-      },
-      success: function(res){
-        console.log(res.data);
-      },
-      fail:function(res){
-        console.log(res);
-      }
-    })
     wx.request({
       method: 'POST',
-      url: serverurl + '/releaseProduct',
+      url: serverurl_api + '/api/wechat-products',
       data: {
-        'image': image,
-        'name':name,
-        'description': description,
-        'originalPrice':originalPrice,
-        'price':price,
-        'platformKeeping': platformKeeping,
-        'openId': openId
+        'wechatUserId': wechatUserId,
+        'productName': name,
+        'productCode': name,
+        'metaDesc': description,
+        'originalPrice': originalPrice,
+        'price': price,
+        'platformKeeping': platformKeeping
       },
-      header:{'content-type':'application/x-www-form-urlencoded'},
-      success:function(res){
+      header: { 'content-type': 'application/json' },
+      success: function (res) {
         wx.showToast({
           title: '宝贝发布成功',
           image: '../images/success.png',
           duration: 1000
         })
-        setTimeout(function(){
+        that.uploadProductImages(res.data.id, image);
+        setTimeout(function () {
           that.setData({
             'image': '',
             'name': '',
@@ -163,39 +151,56 @@ Page({
       }
     })
   },
-
+  uploadProductImages: function (productId, image) {
+    var serverurl_api = wx.getStorageSync("serverurl-api");
+    wx.uploadFile({
+      url: serverurl_api + '/api/wechat-product-images/upload',
+      filePath: image,
+      name: 'file',
+      header: { 'content-type': 'application/x-www-form-urlencoded' },
+      formData: {
+        "productId": productId
+      },
+      success: function (res) {
+        console.log(res.data);
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })
