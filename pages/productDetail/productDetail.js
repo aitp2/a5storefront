@@ -1,23 +1,92 @@
 // pages/productDetail/productDetail.js
+var sliderWidth = 85; // 需要设置slider的宽度，用于计算中间位置
 Page({
 
-  onShareAppMessage: function () {
-    return {
-      title: '产品分享',
-      desc: '',
-      path: '/page/productDetail?id=123'
-    }
-  },
-
   /**
-   * 页面的初始数据
-   */
+ * 页面的初始数据
+ */
   data: {
     serverurl_api: wx.getStorageSync("serverurl-api"),
     tabs: ["产品列表", "留言信息"],
     activeIndex: 0,
     sliderOffset: 1
   },
+
+  load_message_list: function () {
+    var that = this;
+    wx.request({
+      method: "GET",
+      url: that.data.serverurl_api + '/api/messages/product/' + that.data.productId,
+      data: {
+      },
+      header: { 'content-type': 'application/json' },
+      success: function (res) {
+        var datas = res.data;
+        console.log(JSON.stringify(datas));
+        that.setData({
+          questions: datas
+        })
+      },
+      fail: function (res) {
+        console.log('error:' + res);
+      }
+    })
+  },
+
+  message_content: function (e) {
+    var that = this;
+    that.setData({
+      messageContent: e.detail.value
+    })
+  },
+  reply_question: function (event){
+    var that = this;
+    console.log(event);
+    that.setData({
+      "curentQuestionId": event.currentTarget.dataset.questionid      
+    })
+  },
+  reply_answer: function (event) {
+    var that = this;
+    console.log(event);
+    that.setData({
+      "curentQuestionId": event.currentTarget.dataset.questionid
+    })
+  },
+  submitMessageForm: function (e) {
+    var that = this;
+    var postData={
+      'content': that.data.messageContent,
+      'userId': that.data.wechatUserId,
+      'userName': '',
+      'relateTo': that.data.productId      
+    };
+    if (!!that.data.curentQuestionId){
+      postData = {
+        'content': that.data.messageContent,
+        'userId': that.data.wechatUserId,
+        'userName': '',        
+        'questionId': that.data.curentQuestionId
+      };
+    }
+    wx.request({
+      method: 'POST',
+      url: that.data.serverurl_api + '/api/messages',
+      data: postData,
+      header: { 'content-type': 'application/json' },
+      success: function (res) {
+        that.setData({         
+          'curentQuestionId': '',          
+        });
+        wx.showToast({
+          title: '留言成功',
+          image: '../images/success.png',
+          duration: 1000
+        });  
+        that.load_message_list();      
+      }
+    })
+  },  
 
   /**
    * 生命周期函数--监听页面加载
@@ -27,7 +96,7 @@ Page({
     that.setData({
       "productId": options.productId,
       "wechatUserId": options.wechatUserId
-    })
+    });
     var serverurl = wx.getStorageSync("serverurl");
     var serverurl_api = wx.getStorageSync("serverurl-api");
     var openId = wx.getStorageSync("openId");
@@ -48,7 +117,7 @@ Page({
     }
     wx.request({
       method: "GET",
-      url: serverurl_api + '/api/wechat-products/' + options.productId,
+      url: that.data.serverurl_api + '/api/wechat-products/' + that.data.productId,
       data: {
       },
       header: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -61,7 +130,8 @@ Page({
       fail: function (res) {
         console.log('error:' + res);
       }
-    }),
+    });
+
       wx.request({
         method: "GET",
         url: serverurl_api + '/api/wechat-products/',
@@ -77,26 +147,10 @@ Page({
         fail: function (res) {
           console.log('error:' + res);
         }
-      }),
+      });
     
-    
-    wx.request({
-        method: "GET",
-        url: serverurl_api + '/api/messages/product/' + options.productId,
-        data: {
-        },
-        header: { 'content-type': 'application/json' },
-        success: function (res) {
-          var datas = res.data;
-          console.log(JSON.stringify(datas));
-          that.setData({
-            questions: datas
-          })
-        },
-        fail: function (res) {
-          console.log('error:' + res);
-        }
-    })
+    that.load_message_list();
+
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -105,8 +159,10 @@ Page({
         });
       }
     });
-  },
 
+
+  },
+  
   tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
@@ -220,6 +276,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '产品分享',
+      desc: '',
+      path: '/page/productDetail?id=123'
+    }
   }
 })

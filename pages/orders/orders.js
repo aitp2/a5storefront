@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+
   },
 
   /**
@@ -16,22 +16,23 @@ Page({
   onLoad: function (options) {
     var that = this;
     var openId = wx.getStorageSync("openId");
-    var serverurl = wx.getStorageSync("serverurl");
+    var serverurl_api = wx.getStorageSync("serverurl-api");
     wx.request({
-      method: "POST",
-      url: serverurl + '/orders',
+      method: "GET",
+      url: serverurl_api + '/api/wechat-orders/mine/' + wx.getStorageSync("wechatUser").id,
       data: {
-        'openId': openId
       },
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
+      header: { 'content-type': 'application/json' },
       success: function (res) {
         var datas = res.data;
-        for(var i=0;i<datas.length;i++){
-          datas[i].createDate = util.formatTime(datas[i].createDate);
+        for (var i = 0; i < datas.length; i++) {
+          console.log(datas[i].createdDate);
+          datas[i].createdDate = util.formatTime(datas[i].createdDate);
+
         }
+        console.log(JSON.stringify(datas));
         that.setData({
-          orders: datas,
-          serverurl: serverurl
+          orders: datas
         })
       },
       fail: function (res) {
@@ -40,7 +41,7 @@ Page({
     })
   },
 
-  cancelOrder: function(e){
+  cancelOrder: function (e) {
     var orderCode = e.detail.value.code;
     var serverurl = wx.getStorageSync("serverurl");
     wx.showModal({
@@ -75,7 +76,7 @@ Page({
     })
   },
 
-  payOrder:function(e){
+  payOrder: function (e) {
     var that = this;
     var orderCode = e.detail.value.code;
     var serverurl = wx.getStorageSync("serverurl");
@@ -88,7 +89,7 @@ Page({
       header: { 'content-type': 'application/x-www-form-urlencoded' },
       success: function (res) {
         var datas = res.data;
-        if(datas.product.isSellOut == true){
+        if (datas.product.isSellOut == true) {
           wx.showModal({
             title: '提示',
             content: '该产品已售出，请选购其他产品？',
@@ -118,7 +119,7 @@ Page({
               }
             }
           })
-        }else{
+        } else {
           wx.showModal({
             title: '提示',
             content: '请确保已添加卖方微信并付款？',
@@ -157,48 +158,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

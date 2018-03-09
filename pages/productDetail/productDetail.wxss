@@ -16,10 +16,6 @@ page {
   padding-bottom: 10px;
 }
 
-.weui-navbar__slider {
-  width:15em;
-}
-
 .bd_right{
   text-align: right;
   padding-bottom: 5px;

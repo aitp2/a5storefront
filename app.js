@@ -5,8 +5,10 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now()) 
     wx.setStorageSync('logs', logs)
-    wx.setStorageSync("serverurl", "https://www.transa5.tech")
-    wx.setStorageSync("serverurl-api", "http://localhost:8080")
+    wx.setStorageSync("serverurl", "https://www.transa5.tech")   
+  //wx.setStorageSync("serverurl-api", "http://localhost:8080")
+  //wx.setStorageSync("serverurl", "http://kvipfr.natappfree.cc")  
+    wx.setStorageSync("serverurl-api", "https://demoapi.transa5.tech")
     // 获取用户信息
     wx.getSetting({
       success: res => {

@@ -59,13 +59,7 @@ Page({
       platformKeeping: e.detail.value
     })
   },
-  image: function (e) {
-    var that = this;
-    that.setData({
-      image: e.detail.value
-    })
-  },
-
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -87,27 +81,12 @@ Page({
 
   },
 
-  uploadFormImg: function () {
-    var that = this;
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        var tempFilePaths = res.tempFilePaths;
-        that.setData({
-          image: tempFilePaths[0]
-        })
-      },
-    })
-  },
-
   uploadProduct: function (e) {
     var that = this;
     var wechatUserId = wx.getStorageSync("wechatUser").id;
     var serverurl = wx.getStorageSync("serverurl");
     var serverurl_api = wx.getStorageSync("serverurl-api");
-    var image = that.data.image;
+    
     var name = that.data.name;
     var description = that.data.description;
     var originalPrice = that.data.originalPrice;
@@ -132,22 +111,25 @@ Page({
           image: '../images/success.png',
           duration: 1000
         })
-        that.uploadProductImages(res.data.id, image);
-        setTimeout(function () {
-          that.setData({
-            'image': '',
-            'name': '',
-            'description': '',
-            'originalPrice': '',
-            'price': '',
-            'platformKeeping': '',
-          })
-          var page = getCurrentPages().pop();
-          if (page == undefined || page == null) {
-            return;
+        that.data.files.forEach(function (value, index, array) {
+          that.uploadProductImages(res.data.id, value);
+          if(index+1==array.length){
+            that.setData({
+               files: [],
+              'name': '',
+              'description': '',
+              'originalPrice': '',
+              'price': '',
+              'platformKeeping': ''
+            })
+            var page = getCurrentPages().pop();
+            if (page == undefined || page == null) {
+              return;
+            }
+            page.onLoad();
           }
-          page.onLoad();
-        }, 1000)
+        })   
+        
       }
     })
   },
@@ -169,6 +151,7 @@ Page({
       }
     })
   },
+
   /**
    * 生命周期函数--监听页面隐藏
    */

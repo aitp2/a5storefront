@@ -1,18 +1,8 @@
 <view class="app">
   <view class="ele-container">
-    <form bindsubmit="uploadProduct" class="element form-vessel" style="background-color:rgba(0,0,0,0);opacity:1;margin-left:auto;">
-      <view class="ele-container">
-        <view class="element upload-img js-form-ele" style="margin-left:130px;margin-top:0;line-height:80px;margin-right:auto;width:60px;height:80px;">
-          <block wx:if="{{image}}">
-            <image class="plus-div" catchtap="uploadFormImg" src="{{image}}" mode="aspectFit" vaue="{{image}}"></image>
-          </block>
-          <view catchtap="uploadFormImg" class="plus-div">
-            <text>+</text>
-          </view>
-        </view>
-      </view>
+    <form bindsubmit="uploadProduct" class="element form-vessel" style="background-color:rgba(0,0,0,0);opacity:1;margin-left:auto;">      
 
-      <view class="ele-container">
+    <view class="ele-container">
     <view class="page__bd">
         <view class="weui-cells">
             <view class="weui-cell">

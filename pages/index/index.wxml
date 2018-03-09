@@ -1,15 +1,13 @@
 <!--index.wxml-->
 <view class="ele-container">
   <view class="element goods-list scroll-ele goods-list-mode-1" scroll-top="0" scroll-y="" style="opacity:1;color:rgb(102, 102, 102);font-size:16px;height:auto;margin-left:auto;">
-    
-          <view class="js-list-container">
-          <block wx:if="{{products}}">
+  <view class="js-list-container">
+  <block wx:if="{{products}}">
       <block wx:for="{{products}}" wx:for-item="product" wx:key="product">
-        
             <view class="goods-list-item background-ele router js-to-detail" style="height:246px;margin-left:auto;">
             <navigator url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}">
               <view class="inner-content">
-                <image class="list-img" mode="scaleToFill" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" style="width:175px;height:175px;margin-left:auto;"></image>
+                <image class="list-img" mode="scaleToFill" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" style="width:80%;height:175px;margin-left:auto;"></image>
                 <view class="title-container" style="width: 187px;margin-left: 15px;">
                   <view class="title">{{product.name}}</view>
                   <view style="width: 187px">
