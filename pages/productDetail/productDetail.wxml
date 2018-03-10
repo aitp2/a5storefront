@@ -69,7 +69,7 @@
 
                       <view class="weui-cell">
                         <view class="weui-cell__hd">
-                          <image src="{{userInfo.avatarUrl}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                          <image src="{{question.icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
                         </view>
                         <view class="weui-cell__bd" data-questionid="{{question.id}}" bindtap="reply_question">{{question.content}}</view>
                         <view class="weui-cell__ft"></view>
@@ -81,7 +81,7 @@
                             <view class="weui-cell__bd"></view>
                             <view class="weui-cell__ft" data-questionid="{{question.id}}" bindtap="reply_answer" >{{feedback.content}}</view>
                             <view class="weui-cell__ft">
-                              <image src="{{userInfo.avatarUrl}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                              <image src="{{feedback.icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
                             </view>
                           </view>
                         </block>

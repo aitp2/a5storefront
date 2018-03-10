@@ -63,14 +63,14 @@ Page({
     var postData = {
       'content': that.data.messageContent,
       'userId': that.data.wechatUserId,
-      'userName': '',
+      'icon': that.data.userInfo.avatarUrl,
       'relateTo': that.data.productId
     };
     if (!!that.data.curentQuestionId) {
       postData = {
         'content': that.data.messageContent,
         'userId': that.data.wechatUserId,
-        'userName': '',
+        'icon': that.data.userInfo.avatarUrl,
         'questionId': that.data.curentQuestionId
       };
     }
