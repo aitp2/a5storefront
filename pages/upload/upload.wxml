@@ -42,8 +42,11 @@
       </view>
       <view class="ele-container">
         <view class="element input-ele-des js-form-ele" style="margin-left:35px;margin-top:0;margin-right:auto;width:250px;height:35x;opacity:1">
-          <input bindchange="description" placeholder="宝贝描述" type="text" name="description" value="{{description}}">
-          </input>
+          <!--
+          <input bindchange="description" placeholder="宝贝描述" type="text" name="description" value="{{description}}"></input>
+          -->
+          <textarea bindblur="description" class="weui-textarea" placeholder="宝贝描述" style="height: 5.3em" value='{{description}}' />
+          
         </view>
       </view>
       <view class="ele-container">

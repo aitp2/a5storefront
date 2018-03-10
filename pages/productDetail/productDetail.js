@@ -1,5 +1,6 @@
 // pages/productDetail/productDetail.js
 var sliderWidth = 85; // 需要设置slider的宽度，用于计算中间位置
+const app = getApp()
 Page({
 
   /**
@@ -7,9 +8,13 @@ Page({
  */
   data: {
     serverurl_api: wx.getStorageSync("serverurl-api"),
-    tabs: ["产品列表", "留言信息"],
+    tabs: ["产品详情", "留言信息"],
     activeIndex: 0,
-    sliderOffset: 1
+    sliderOffset: 1,
+    indicatorDots: true,
+    autoplay: true,
+    interval: 5000,
+    duration: 1000
   },
 
   load_message_list: function () {
@@ -39,11 +44,11 @@ Page({
       messageContent: e.detail.value
     })
   },
-  reply_question: function (event){
+  reply_question: function (event) {
     var that = this;
     console.log(event);
     that.setData({
-      "curentQuestionId": event.currentTarget.dataset.questionid      
+      "curentQuestionId": event.currentTarget.dataset.questionid
     })
   },
   reply_answer: function (event) {
@@ -55,17 +60,17 @@ Page({
   },
   submitMessageForm: function (e) {
     var that = this;
-    var postData={
+    var postData = {
       'content': that.data.messageContent,
       'userId': that.data.wechatUserId,
       'userName': '',
-      'relateTo': that.data.productId      
+      'relateTo': that.data.productId
     };
-    if (!!that.data.curentQuestionId){
+    if (!!that.data.curentQuestionId) {
       postData = {
         'content': that.data.messageContent,
         'userId': that.data.wechatUserId,
-        'userName': '',        
+        'userName': '',
         'questionId': that.data.curentQuestionId
       };
     }
@@ -75,18 +80,19 @@ Page({
       data: postData,
       header: { 'content-type': 'application/json' },
       success: function (res) {
-        that.setData({         
-          'curentQuestionId': '',          
+        that.setData({
+          'curentQuestionId': '',
+          'messageContent':''
         });
         wx.showToast({
           title: '留言成功',
-          image: '../images/success.png',
+          image: '../../images/success.png',
           duration: 1000
-        });  
-        that.load_message_list();      
+        });
+        that.load_message_list();
       }
     })
-  },  
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -95,7 +101,9 @@ Page({
     var that = this;
     that.setData({
       "productId": options.productId,
-      "wechatUserId": options.wechatUserId
+      "wechatUserId": wx.getStorageSync("wechatUser").id,
+      "salerId": options.wechatUserId,
+       userInfo: app.globalData.userInfo
     });
     var serverurl = wx.getStorageSync("serverurl");
     var serverurl_api = wx.getStorageSync("serverurl-api");
@@ -132,23 +140,23 @@ Page({
       }
     });
 
-      wx.request({
-        method: "GET",
-        url: serverurl_api + '/api/wechat-products/',
-        data: {
-        },
-        header: { 'content-type': 'application/x-www-form-urlencoded' },
-        success: function (res) {
-          var datas = res.data;
-          that.setData({
-            productList: datas
-          })
-        },
-        fail: function (res) {
-          console.log('error:' + res);
-        }
-      });
-    
+    wx.request({
+      method: "GET",
+      url: serverurl_api + '/api/wechat-products/user/' + that.data.wechatUserId,
+      data: {
+      },
+      header: { 'content-type': 'application/x-www-form-urlencoded' },
+      success: function (res) {
+        var datas = res.data;
+        that.setData({
+          productList: datas
+        })
+      },
+      fail: function (res) {
+        console.log('error:' + res);
+      }
+    });
+
     that.load_message_list();
 
     wx.getSystemInfo({
@@ -162,7 +170,7 @@ Page({
 
 
   },
-  
+
   tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
@@ -170,21 +178,31 @@ Page({
     });
   },
   buyProduct: function (e) {
-    var openId = wx.getStorageSync("openId");
+    var that = this;
+
     var productCode = e.detail.value.code;
-    var serverurl = wx.getStorageSync("serverurl");
+    var serverurl_api = wx.getStorageSync("serverurl-api");
     wx.showModal({
       title: '提示',
       content: '您确定购买该产品吗？',
       success: function (res) {
         if (res.confirm) {
           wx.request({
-            url: serverurl + '/placeOrder',
+            method: "POST",
+            url: serverurl_api + '/api/wechat-orders',
             data: {
-              'productCode': productCode,
-              'userOpenId': openId
+              'orderAmount': that.data.product.price,
+              'customerId': wx.getStorageSync("wechatUser").id,
+              'salerId': that.data.salerId,
+              "wechatOrderItems": [{
+                "quantity": 1,
+                "price": that.data.product.price,
+                "retailPrice": that.data.product.originalPrice,
+                "productId": that.data.product.id,
+                "productName": that.data.product.productName
+              }]
             },
-            header: { 'content-type': 'application/x-www-form-urlencoded' },
+            header: { 'content-type': 'application/json' },
             success: function (res) {
               setTimeout(function () {
                 wx.navigateTo({

@@ -31,6 +31,7 @@
               <label class="ico-moon icon-rightarrow"></label>
             </navigator>
           </view>
+          <!-- -->
           <view style="margin-top: -1px">
             <navigator url="../releasedProducts/releasedProducts">
               <label class="ico-moon icon-location"></label>
@@ -38,6 +39,8 @@
               <label class="ico-moon icon-rightarrow"></label>
             </navigator>
           </view>
+          
+
         </view>
       </view>
     </view>

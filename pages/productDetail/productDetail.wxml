@@ -1,13 +1,16 @@
 <view class="goods-detail-wrap">
   <view class="goods-detail-content">
     <view class="goods-detail-section">
-      <view class="slick-carousel-container">
-        <swiper autoplay="" circular="" duration="1000" interval="5000" current="0">
-          <swiper-item style="transform: translate(0%, 0%) translateZ(0px); will-change: auto; position: absolute; width: 100%; height: 100%;">
-            <image class="list-img" mode="scaleToFill" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" style="width:100%;height:100%;margin-left:auto;"></image>
+    
+      <swiper indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{product.images}}">
+          <swiper-item>
+            <image src="{{serverurl_api}}/api/image/{{item.imageUrl}}" class="slide-image" width="355" height="150"/>
           </swiper-item>
-        </swiper>
-      </view>
+        </block>
+      </swiper>
+
       <view class="goods-header">
         <view class="goods-title">产品名称:{{product.productName}}</view>
         <view class="goods-price">
@@ -35,15 +38,7 @@
         </form>
       </view>
     </view>
-    <view style="padding: 10px;text-align:center;background:#f4f4f4;color:#b2b2b2;font-size:12px;" hidden="">
-      <view class="goods-detail-section">
-        <view class="comment-title">
-          <view style="border-bottom: 1px solid #f4f4f4; padding-bottom:10px;">产品详情</view>
-        </view>
-        <view class="goods-details">
-          <view class="wxParse-inline" style="undefined">{{product.metaDesc}}</view>
-        </view>
-      </view>
+    <view style="padding: 10px;text-align:center;background:#f4f4f4;color:#b2b2b2;font-size:12px;" hidden="">     
 
       <view class="page">
         <view class="page__bd">
@@ -58,39 +53,12 @@
             </view>
             <view class="weui-tab__panel">
 
-              <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-
-                <view class="page">
-                  <view class="page__bd">
-                    <view class="weui-panel weui-panel_access">
-                      <view class="weui-panel__bd">
-
-                        <block wx:if="{{productList}}">
-                          <block wx:for="{{productList}}" wx:for-item="product" wx:key="product">
-                            <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                                <image class="weui-media-box__thumb" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" />
-                              </view>
-                              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                                <view class="weui-media-box__title">{{product.productName}}</view>
-                                <view class="weui-media-box__desc">价格：￥{{product.price}}</view>
-                              </view>
-                            </navigator>
-                          </block>
-                        </block>
-
-
-                      </view>
-                      <view class="weui-panel__ft">
-                        <view class="weui-cell weui-cell_access weui-cell_link">
-                          <view class="weui-cell__bd bd_right">查看更多</view>
-                          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                        </view>
-                      </view>
-                    </view>
-                  </view>
+              <view class="weui-tab__content" hidden="{{activeIndex != 0}}">  
+              <view class="weui-cells weui-cells_after-title">           
+                <view class="goods-details">
+                  <view class="wxParse-inline" style="undefined">{{product.metaDesc}}</view>
                 </view>
-
+                </view>
               </view>
               <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
 
@@ -101,7 +69,7 @@
 
                       <view class="weui-cell">
                         <view class="weui-cell__hd">
-                          <image src="http://img1.imgtn.bdimg.com/it/u=2291692025,1912539770&fm=27&gp=0.jpg" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                          <image src="{{userInfo.avatarUrl}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
                         </view>
                         <view class="weui-cell__bd" data-questionid="{{question.id}}" bindtap="reply_question">{{question.content}}</view>
                         <view class="weui-cell__ft"></view>
@@ -113,7 +81,7 @@
                             <view class="weui-cell__bd"></view>
                             <view class="weui-cell__ft" data-questionid="{{question.id}}" bindtap="reply_answer" >{{feedback.content}}</view>
                             <view class="weui-cell__ft">
-                              <image src="http://img1.imgtn.bdimg.com/it/u=2291692025,1912539770&fm=27&gp=0.jpg" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                              <image src="{{userInfo.avatarUrl}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
                             </view>
                           </view>
                         </block>
@@ -127,7 +95,7 @@
                     <view class="weui-cells weui-cells_after-title">
                       <view class="weui-cell">
                         <view class="weui-cell__bd">
-                          <textarea bindblur="message_content" class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" />
+                          <textarea bindblur="message_content" class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" value='{{messageContent}}' />
                           <view class="weui-textarea-counter">0/200</view>
                         </view>
                       </view>
@@ -143,6 +111,45 @@
           </view>
         </view>
       </view>
+    </view>
+
+    <view class="goods-detail-section">
+        <view class="comment-title">
+          <view style="border-bottom: 1px solid #f4f4f4; padding-bottom:10px;">店铺商品</view>
+        </view>
+         <view class="page">
+            <view class="page__bd">
+              <view class="weui-panel weui-panel_access">
+                <view class="weui-panel__bd">
+
+                  <block wx:if="{{productList}}">
+                    <block wx:for="{{productList}}" wx:for-item="product" wx:key="product">
+                      <navigator url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                          <image class="weui-media-box__thumb" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" />
+                        </view>
+                        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                          <view class="weui-media-box__title">{{product.productName}}</view>
+                          <view class="weui-media-box__desc">价格：￥{{product.price}}</view>
+                        </view>
+                      </navigator>
+                    </block>
+                  </block>
+                </view>
+
+                <!-- 
+                <view class="weui-panel__ft">
+                  <view class="weui-cell weui-cell_access weui-cell_link">
+                    <view class="weui-cell__bd bd_right">查看更多</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                  </view>
+                </view>
+                -->
+
+              </view>
+            </view>
+        </view>
+        
     </view>
 
     <view wx:if="{{!product.isSellOut}}" class="goods-bottom-opt">
