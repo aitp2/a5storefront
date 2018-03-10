@@ -37,6 +37,26 @@ Page({
       }
     })
   },
+  
+  load_relatGoodsList: function (wechatUserId){
+    var that = this;
+    wx.request({
+      method: "GET",
+      url: that.data.serverurl_api + '/api/wechat-products/user/' + wechatUserId,
+      data: {
+      },
+      header: { 'content-type': 'application/json' },
+      success: function (res) {
+        var datas = res.data;
+        that.setData({
+          productList: datas
+        })
+      },
+      fail: function (res) {
+        console.log('error:' + res);
+      }
+    });
+  },
 
   message_content: function (e) {
     var that = this;
@@ -131,6 +151,7 @@ Page({
       header: { 'content-type': 'application/x-www-form-urlencoded' },
       success: function (res) {
         var datas = res.data;
+        that.load_relatGoodsList(datas.wechatUserId);
         that.setData({
           product: datas
         })
@@ -140,24 +161,7 @@ Page({
       }
     });
 
-    wx.request({
-      method: "GET",
-      url: serverurl_api + '/api/wechat-products/user/' + that.data.wechatUserId,
-      data: {
-      },
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      success: function (res) {
-        var datas = res.data;
-        that.setData({
-          productList: datas
-        })
-      },
-      fail: function (res) {
-        console.log('error:' + res);
-      }
-    });
-
-    that.load_message_list();
+    that.load_message_list();    
 
     wx.getSystemInfo({
       success: function (res) {

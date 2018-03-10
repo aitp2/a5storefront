@@ -57,6 +57,9 @@
               <view class="weui-cells weui-cells_after-title">           
                 <view class="goods-details">
                   <view class="wxParse-inline" style="undefined">{{product.metaDesc}}</view>
+                  <block wx:for="{{product.images}}">                    
+                      <image src="{{serverurl_api}}/api/image/{{item.imageUrl}}" class="slide-image" width="355" height="150"/>             
+                  </block>
                 </view>
                 </view>
               </view>
