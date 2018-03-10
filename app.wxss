@@ -287,6 +287,9 @@ a {
   box-sizing: border-box;
   vertical-align:middle;
 }
+.flex-sub-box-1 {
+  width: 100%;
+}
 .flex-sub-box-2 {
   width: 50%;
 }

@@ -9,12 +9,11 @@
         </swiper>
       </view>
       <view class="goods-header">
-        <view class="goods-title">产品名称:{{product.productName}}</view>
+        <view class="goods-title">{{product.productName}}</view>
         <view class="goods-price">
           <view class="goods-current-price">
-            <text class="promotionPrice">原价:¥{{product.originalPrice}}</text>
-            <text>\t\t</text>
-            <text style="font-weight:bold; font-size:20px;">现价:¥{{product.price}}</text>
+            <text style="font-size:20px;">¥{{product.price}}</text>
+            <text class="promotionPrice">¥{{product.originalPrice}}</text>
           </view>
         </view>
       </view>
@@ -148,13 +147,13 @@
     <view wx:if="{{!product.isSellOut}}" class="goods-bottom-opt">
       <form bindsubmit="buyProduct">
         <input hidden="true" name="code" type="text" value="{{product.code}}"></input>
-        <view class="flex-sub-box-3">
+        <view class="flex-sub-box-1">
           <button class="btn btn-orange buy-goods-directly" form-type="submit">立即购买 </button>
         </view>
       </form>
     </view>
     <view wx:if="{{product.isSellOut}}" class="goods-bottom-opt">
-      <view class="flex-sub-box-3">
+      <view class="flex-sub-box-1">
         <button class="btn btn-orange buy-goods-directly" form-type="submit">已售出</button>
       </view>>
     </view>

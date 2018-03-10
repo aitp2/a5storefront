@@ -9,10 +9,11 @@
               <view class="inner-content">
                 <image class="list-img" mode="scaleToFill" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" style="width:80%;height:175px;margin-left:auto;"></image>
                 <view class="title-container" style="width: 187px;margin-left: 15px;">
-                  <view class="title">{{product.name}}</view>
+                  <view class="title">{{product.productName}}</view>
                   <view style="width: 187px">
-                    <text class="promotionPrice">原价:{{product.originalPrice}}元</text><text wx:if="{{product.isSellOut == true}}" style="color:red;">\t已售出</text>
-                    <text class="goods-current-price">现价:{{product.price}}元</text>
+                    <text class="goods-current-price">¥{{product.price}}</text>
+                    <text class="promotionPrice">¥{{product.originalPrice}}</text>
+                    <text wx:if="{{product.isSellOut == true}}" style="color:red;">\t已售</text>
                   </view>
                 </view>
               </view>
