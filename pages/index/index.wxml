@@ -6,8 +6,7 @@
       <block wx:for="{{products}}" wx:for-item="product" wx:key="product">
             <view class="goods-list-item background-ele router js-to-detail">
             <navigator url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}" hover-class="none">
-              <view class="inner-content">
-                    <text class="promotionPrice">原价:{{product.originalPrice}}元</text><text wx:if="{{product.sellOut == true}}" style="color:red;">\t已售出</text>
+              <view class="inner-content">                    
                 <image class="list-img" mode="aspectFit" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}"></image>
                 <view class="title-container" style="box-sizing:border-box;padding:0 15px;">
                   <view class="title">{{product.productName}}</view>
