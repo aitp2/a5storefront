@@ -56,7 +56,7 @@
               <view class="weui-tab__content" hidden="{{activeIndex != 0}}">  
               <view class="weui-cells weui-cells_after-title">           
                 <view class="goods-details">
-                  <view class="wxParse-inline" style="undefined">{{product.metaDesc}}</view>
+                  <view class="weui-article__p" style="undefined">{{product.metaDesc}}</view>
                   <block wx:for="{{product.images}}">                    
                       <image src="{{serverurl_api}}/api/image/{{item.imageUrl}}" class="slide-image" width="355" height="150"/>             
                   </block>
@@ -155,7 +155,7 @@
         
     </view>
 
-    <view wx:if="{{!product.isSellOut}}" class="goods-bottom-opt">
+    <view wx:if="{{!product.sellOut}}" class="goods-bottom-opt">
       <form bindsubmit="buyProduct">
         <input hidden="true" name="code" type="text" value="{{product.code}}"></input>
         <view class="flex-sub-box-3">
@@ -163,7 +163,7 @@
         </view>
       </form>
     </view>
-    <view wx:if="{{product.isSellOut}}" class="goods-bottom-opt">
+    <view wx:if="{{product.sellOut}}" class="goods-bottom-opt">
       <view class="flex-sub-box-3">
         <button class="btn btn-orange buy-goods-directly" form-type="submit">已售出</button>
       </view>>

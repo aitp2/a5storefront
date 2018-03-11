@@ -11,7 +11,7 @@
                 <view class="title-container" style="width: 187px;margin-left: 15px;">
                   <view class="title">{{product.name}}</view>
                   <view style="width: 187px">
-                    <text class="promotionPrice">原价:{{product.originalPrice}}元</text><text wx:if="{{product.isSellOut == true}}" style="color:red;">\t已售出</text>
+                    <text class="promotionPrice">原价:{{product.originalPrice}}元</text><text wx:if="{{product.sellOut == true}}" style="color:red;">\t已售出</text>
                     <text class="goods-current-price">现价:{{product.price}}元</text>
                   </view>
                 </view>

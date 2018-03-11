@@ -39,23 +39,25 @@ Page({
   },
   
   load_relatGoodsList: function (wechatUserId){
-    var that = this;
-    wx.request({
-      method: "GET",
-      url: that.data.serverurl_api + '/api/wechat-products/user/' + wechatUserId,
-      data: {
-      },
-      header: { 'content-type': 'application/json' },
-      success: function (res) {
-        var datas = res.data;
-        that.setData({
-          productList: datas
-        })
-      },
-      fail: function (res) {
-        console.log('error:' + res);
-      }
-    });
+    if (!!wechatUserId){
+      var that = this;
+      wx.request({
+        method: "GET",
+        url: that.data.serverurl_api + '/api/wechat-products/user/' + wechatUserId,
+        data: {
+        },
+        header: { 'content-type': 'application/json' },
+        success: function (res) {
+          var datas = res.data;
+          that.setData({
+            productList: datas
+          })
+        },
+        fail: function (res) {
+          console.log('error:' + res);
+        }
+      });
+    }
   },
 
   message_content: function (e) {

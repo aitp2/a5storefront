@@ -45,7 +45,7 @@
           <!--
           <input bindchange="description" placeholder="宝贝描述" type="text" name="description" value="{{description}}"></input>
           -->
-          <textarea bindblur="description" class="weui-textarea" placeholder="宝贝描述" style="height: 5.3em" value='{{description}}' />
+          <textarea bindblur="description" maxlength="1000" class="weui-textarea" placeholder="宝贝描述" style="height: 5.3em" value='{{description}}' />
           
         </view>
       </view>
