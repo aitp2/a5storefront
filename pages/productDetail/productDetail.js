@@ -1,5 +1,4 @@
 // pages/productDetail/productDetail.js
-var sliderWidth = 85; // 需要设置slider的宽度，用于计算中间位置
 const app = getApp()
 Page({
 
@@ -14,7 +13,8 @@ Page({
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
-    duration: 1000
+    duration: 1000,
+    disabledBuy: false
   },
 
   load_message_list: function () {
@@ -192,6 +192,9 @@ Page({
       title: '提示',
       content: '您确定购买该产品吗？',
       success: function (res) {
+        that.setData({
+          disabledBuy:true
+        });
         if (res.confirm) {
           wx.request({
             method: "POST",
@@ -209,12 +212,12 @@ Page({
               }]
             },
             header: { 'content-type': 'application/json' },
-            success: function (res) {
-              setTimeout(function () {
-                wx.navigateTo({
-                  url: '../orders/orders',
-                })
-              }, 1000)
+            success: function (res) {  
+              wx.navigateTo({
+                url: '../orderDetail/orderDetail?orderId=' + res.data.id
+              })            
+              // setTimeout(function () {                 
+              // }, 1000)
             }
           })
         } else if (res.cancel) {

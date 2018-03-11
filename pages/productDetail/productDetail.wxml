@@ -155,7 +155,7 @@
       <form bindsubmit="buyProduct">
         <input hidden="true" name="code" type="text" value="{{product.code}}"></input>
         <view class="flex-sub-box-1">
-          <button class="btn btn-red buy-goods-directly" form-type="submit">立即购买 </button>
+          <button class="btn btn-red buy-goods-directly" form-type="submit" disabled="{{disabledBuy}}">立即购买 </button>
         </view>
       </form>
     </view>
