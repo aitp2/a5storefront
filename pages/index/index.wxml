@@ -4,13 +4,13 @@
   <view class="js-list-container">
   <block wx:if="{{products}}">
       <block wx:for="{{products}}" wx:for-item="product" wx:key="product">
-            <view class="goods-list-item background-ele router js-to-detail" style="height:246px;margin-left:auto;">
-            <navigator url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}">
+            <view class="goods-list-item background-ele router js-to-detail">
+            <navigator url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}" hover-class="none">
               <view class="inner-content">
-                <image class="list-img" mode="scaleToFill" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" style="width:80%;height:175px;margin-left:auto;"></image>
-                <view class="title-container" style="width: 187px;margin-left: 15px;">
+                <image class="list-img" mode="aspectFit" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}"></image>
+                <view class="title-container" style="box-sizing:border-box;padding:0 15px;">
                   <view class="title">{{product.productName}}</view>
-                  <view style="width: 187px">
+                  <view>
                     <text class="goods-current-price">¥{{product.price}}</text>
                     <text class="promotionPrice">¥{{product.originalPrice}}</text>
                     <text wx:if="{{product.isSellOut == true}}" style="color:red;">\t已售</text>

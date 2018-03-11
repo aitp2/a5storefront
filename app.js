@@ -3,11 +3,9 @@ App({
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now()) 
+    logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    wx.setStorageSync("serverurl", "https://www.transa5.tech")   
-  //wx.setStorageSync("serverurl-api", "http://localhost:8080")
-  //wx.setStorageSync("serverurl", "http://kvipfr.natappfree.cc")  
+    wx.setStorageSync("serverurl", "https://www.transa5.tech")
     wx.setStorageSync("serverurl-api", "https://demoapi.transa5.tech")
     // 获取用户信息
     wx.getSetting({
@@ -23,7 +21,7 @@ App({
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
-              } 
+              }
             }
           })
         } else {
