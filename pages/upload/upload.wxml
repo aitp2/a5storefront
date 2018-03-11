@@ -35,37 +35,37 @@
 
 
       <view class="ele-container">
-        <view class="element input-ele js-form-ele" style="margin-left:35px;margin-top:0;margin-right:auto;width:250px;height:35x;opacity:1">
+        <view class="element input-ele js-form-ele">
           <input bindchange="name" placeholder="宝贝名称" type="text" name="name" value="{{name}}">
           </input>
         </view>
       </view>
       <view class="ele-container">
-        <view class="element input-ele-des js-form-ele" style="margin-left:35px;margin-top:0;margin-right:auto;width:250px;height:35x;opacity:1">
+        <view class="element input-ele-des js-form-ele">
           <!--
           <input bindchange="description" placeholder="宝贝描述" type="text" name="description" value="{{description}}"></input>
           -->
-          <textarea bindblur="description" maxlength="1000" class="weui-textarea" placeholder="宝贝描述" style="height: 5.3em" value='{{description}}' />
+          <textarea bindblur="description" maxlength="1000" class="weui-textarea" placeholder="宝贝描述" style="padding:0 15px;height: 5.3em;box-sizing:border-box" value='{{description}}' />
           
         </view>
       </view>
       <view class="ele-container">
-        <view class="element input-ele js-form-ele" style="margin-left:35px;margin-top:0;margin-right:auto;width:250px;height:35x;opacity:1">
-          <input bindchange="originalPrice" placeholder="宝贝原价" type="text" name="originalPrice" value="{{originalPrice}}">
+        <view class="element input-ele js-form-ele">
+          <input bindchange="originalPrice" placeholder="宝贝原价" type="digit" name="originalPrice" value="{{originalPrice}}">
           </input>
         </view>
       </view>
       <view class="ele-container">
-        <view class="element input-ele js-form-ele" style="margin-left:35px;margin-top:0;margin-right:auto;width:250px;height:35x;opacity:1">
-          <input bindchange="price" placeholder="宝贝售价" type="text" name="price" value="{{price}}">
+        <view class="element input-ele js-form-ele">
+          <input bindchange="price" placeholder="宝贝售价" type="digit" name="price" value="{{price}}">
           </input>
         </view>
       </view>
       <view class="ele-container">
-        <view class="element select-ele js-form-ele" style="background-color:rgba(0,0,0,0);margin-top:10px;line-height:35px;opacity:1;margin-left:35px;margin-right:auto;width:250px;height:NANrpx;color:rgb(189, 189, 189);font-size:14px;">
+        <view class="element select-ele js-form-ele" style="background-color:rgba(0,0,0,0);margin-top:10px;line-height:35px;opacity:1color:rgb(189, 189, 189);font-size:14px;">
           <view class="select-container">
-            <label class="title-container" style="color:rgb(151, 151, 151);font-size:14px;background-color:rgb(248, 248, 248);line-height:30px;margin-left:auto;">
-              <text class="title">是否实物</text>
+            <label class="title-container" style="color:rgb(151, 151, 151);font-size:14px;padding:0 15px;background-color:rgb(248, 248, 248);line-height:40px;margin-left:auto;">
+              <text>是否实物</text>
             </label>
             <radio-group bindchange="platformKeeping" class="radio-group">
               <view class="select-item">
@@ -87,7 +87,7 @@
         </view>
       </view>
       <view class="ele-container">
-        <button class="button background-ele" form-type="submit" style="background-color:rgb(238, 87, 85);border-color:rgb(34, 34, 34);border-radius:50px;border-style:none;color:rgb(255, 255, 255);font-size:16px;height:35px;line-height:35px;margin-left:auto;margin-right:auto;margin-top:15px;opacity:1;text-align:center;width:100px;">
+        <button class="button background-ele" form-type="submit" style="background-color:rgb(238, 87, 85);border-color:rgb(34, 34, 34);border-style:none;color:rgb(255, 255, 255);font-size:16px;height:45px;line-height:45px;margin-left:auto;margin-right:auto;margin-top:15px;opacity:1;text-align:center;width:90%;">
           提交 </button>
       </view>
     </form>

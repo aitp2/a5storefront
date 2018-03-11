@@ -12,7 +12,7 @@
       </block>
 
       <block wx:else>
-        <navigator url="../profile/profile">
+        <navigator url="../profile/profile" hover-class="none">
           <view class="show-view" style="background-image:url(http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/top_bg.jpg)">
             <label class="empty-span"></label>
             <image class="cover-thumb" src="{{userInfo.avatarUrl || 'http://img.zhichiwangluo.com/zc_app_default_photo.png'}}"></image>
@@ -25,7 +25,7 @@
       <view class="horizontal-view">
         <view class="horizontal-router-container1">
           <view style="margin-top: -1px">
-            <navigator url="../orders/orders">
+            <navigator url="../orders/orders" hover-class="none">
               <label class="ico-moon icon-notebook"></label>
               <text>我的订单</text>
               <label class="ico-moon icon-rightarrow"></label>
@@ -33,7 +33,7 @@
           </view>
           <!-- -->
           <view style="margin-top: -1px">
-            <navigator url="../releasedProducts/releasedProducts">
+            <navigator url="../releasedProducts/releasedProducts" hover-class="none">
               <label class="ico-moon icon-location"></label>
               <text>我发布的</text>
               <label class="ico-moon icon-rightarrow"></label>

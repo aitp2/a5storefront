@@ -4,24 +4,22 @@
     
       <swiper indicator-dots="{{indicatorDots}}"
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-        <block wx:for="{{product.images}}">
-          <swiper-item>
-            <image src="{{serverurl_api}}/api/image/{{item.imageUrl}}" class="slide-image" width="355" height="150"/>
+          <swiper-item wx:for="{{product.images}}">
+            <image src="{{serverurl_api}}/api/image/{{item.imageUrl}}" mode="aspectFit" class="slide-image" />
           </swiper-item>
-        </block>
       </swiper>
 
       <view class="goods-header">
-        <view class="goods-title">产品名称:{{product.productName}}</view>
+        <view class="goods-title">{{product.productName}}</view>
+        <!-- <view style="color:#f00;font-size:14px">{{product.metaDesc}}</view> -->
         <view class="goods-price">
           <view class="goods-current-price">
-            <text class="promotionPrice">原价:¥{{product.originalPrice}}</text>
-            <text>\t\t</text>
-            <text style="font-weight:bold; font-size:20px;">现价:¥{{product.price}}</text>
+            <text style="font-size:16px;color:#f00">¥{{product.price}}</text>
+            <text class="promotionPrice">¥{{product.originalPrice}}</text>
           </view>
         </view>
       </view>
-      <view wx:if="{{!checkCollect}}">
+      <view wx:if="{{!checkCollect}}" style="position:absolute;right:10px;bottom:5px;">
         <form bindsubmit="addCollect">
           <input hidden="true" name="productOpenId" type="text" value="{{product.openId}}"></input>
           <view>
@@ -29,7 +27,7 @@
           </view>
         </form>
       </view>
-      <view wx:if="{{checkCollect == true}}">
+      <view wx:if="{{checkCollect == true}}" style="position:absolute;right:10px;bottom:5px;">
         <form bindsubmit="removeCollect">
           <input hidden="true" name="productOpenId" type="text" value="{{product.openId}}"></input>
           <view>
@@ -38,7 +36,7 @@
         </form>
       </view>
     </view>
-    <view style="padding: 10px;text-align:center;background:#f4f4f4;color:#b2b2b2;font-size:12px;" hidden="">     
+    <view style="text-align:center;background:#f4f4f4;color:#b2b2b2;font-size:12px;" hidden="">     
 
       <view class="page">
         <view class="page__bd">
@@ -56,9 +54,9 @@
               <view class="weui-tab__content" hidden="{{activeIndex != 0}}">  
               <view class="weui-cells weui-cells_after-title">           
                 <view class="goods-details">
-                  <view class="weui-article__p" style="undefined">{{product.metaDesc}}</view>
-                  <block wx:for="{{product.images}}">                    
-                      <image src="{{serverurl_api}}/api/image/{{item.imageUrl}}" class="slide-image" width="355" height="150"/>             
+                <view style="padding:10px;color:#333;font-size:14px">{{product.metaDesc}}</view>
+                  <block wx:for="{{product.images}}">               
+                      <image src="{{serverurl_api}}/api/image/{{item.imageUrl}}" mode="aspectFit" class="slide-image" />             
                   </block>
                 </view>
                 </view>
@@ -126,17 +124,15 @@
                 <view class="weui-panel__bd">
 
                   <block wx:if="{{productList}}">
-                    <block wx:for="{{productList}}" wx:for-item="product" wx:key="product">
-                      <navigator url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                          <image class="weui-media-box__thumb" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" />
+                      <navigator wx:for="{{productList}}" wx:for-item="product" wx:key="product"  url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}" class="weui-media-box_appmsg" hover-class="weui-cell_active" style="width:50%;box-sizing:border-box;display:inline-block;padding:0;">
+                        <view style="height:140px;">
+                          <image class="weui-media-box__thumb" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" mode="aspectFit"></image>
                         </view>
-                        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                          <view class="weui-media-box__title">{{product.productName}}</view>
-                          <view class="weui-media-box__desc">价格：￥{{product.price}}</view>
+                        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" style="margin:0 10px;">
+                          <view class="weui-media-box__title" style="font-size:14px;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{product.productName}}</view>
+                          <view class="weui-media-box__desc">￥{{product.price}}</view>
                         </view>
                       </navigator>
-                    </block>
                   </block>
                 </view>
 
@@ -155,16 +151,16 @@
         
     </view>
 
-    <view wx:if="{{!product.sellOut}}" class="goods-bottom-opt">
+    <view wx:if="{{!product.isSellOut}}" class="goods-bottom-opt">
       <form bindsubmit="buyProduct">
         <input hidden="true" name="code" type="text" value="{{product.code}}"></input>
-        <view class="flex-sub-box-3">
-          <button class="btn btn-orange buy-goods-directly" form-type="submit">立即购买 </button>
+        <view class="flex-sub-box-1">
+          <button class="btn btn-red buy-goods-directly" form-type="submit">立即购买 </button>
         </view>
       </form>
     </view>
     <view wx:if="{{product.sellOut}}" class="goods-bottom-opt">
-      <view class="flex-sub-box-3">
+      <view class="flex-sub-box-1">
         <button class="btn btn-orange buy-goods-directly" form-type="submit">已售出</button>
       </view>>
     </view>
