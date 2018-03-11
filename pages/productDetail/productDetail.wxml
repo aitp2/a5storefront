@@ -63,16 +63,16 @@
               </view>
               <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
 
-                <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cells weui-cells_after-title"  style="padding-bottom:1px">
 
                   <block wx:if="{{questions}}">
                     <block wx:for="{{questions}}" wx:for-item="question" wx:key="question">
 
                       <view class="weui-cell">
                         <view class="weui-cell__hd">
-                          <image src="{{question.icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                          <image src="{{question.icon}}" style="margin-right: 5px;vertical-align: middle;width:40px; height: 40px;border-radius:100%;"></image>
                         </view>
-                        <view class="weui-cell__bd" data-questionid="{{question.id}}" bindtap="reply_question">{{question.content}}</view>
+                        <view class="weui-cell__bd" data-questionid="{{question.id}}" bindtap="reply_question" style="color:#333">{{question.content}}</view>
                         <view class="weui-cell__ft"></view>
                       </view>
 
@@ -80,9 +80,9 @@
                         <block wx:for="{{question.feedbacks}}" wx:for-item="feedback" wx:key="feedback">
                           <view class="weui-cell">
                             <view class="weui-cell__bd"></view>
-                            <view class="weui-cell__ft" data-questionid="{{question.id}}" bindtap="reply_answer" >{{feedback.content}}</view>
+                            <view class="weui-cell__ft" data-questionid="{{question.id}}" bindtap="reply_answer" style="color:#333">{{feedback.content}}</view>
                             <view class="weui-cell__ft">
-                              <image src="{{feedback.icon}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                              <image src="{{feedback.icon}}" style="margin-right: 5px;vertical-align: middle;width:40px; height: 40px;border-radius:100%"></image>
                             </view>
                           </view>
                         </block>
@@ -101,8 +101,8 @@
                         </view>
                       </view>
                     </view>
-                    <view class="weui-btn-area">
-                      <button class="weui-btn" form-type="submit">留言</button>
+                    <view style="margin:10px auto;width:40%">
+                      <button class="weui-btn" style="background:#1aad19;color:#fff" form-type="submit">留言</button>
                     </view>
                   </form>
 

@@ -166,7 +166,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          sliderLeft: (res.windowWidth / that.data.tabs.length - res.windowWidth / 2) / 2,
+          sliderLeft: (res.windowWidth / that.data.tabs.length - res.windowWidth /2) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
       }
