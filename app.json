@@ -1,14 +1,15 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/upload/upload",
-    "pages/account/account",
-    "pages/profile/profile",
-    "pages/orders/orders",
+    "pages/collector/collector",
     "pages/releasedProducts/releasedProducts",
     "pages/productDetail/productDetail",
-    "pages/collector/collector"
+    "pages/orders/orders",
+    "pages/profile/profile",
+    "pages/account/account",
+    "pages/upload/upload",
+    "pages/logs/logs",
+    "pages/orderDetail/orderDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

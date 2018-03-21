@@ -1,4 +1,4 @@
 /* pages/upload/upload.wxss */
 .ele-container{
-  margin: 10px 0;
+  /* margin: 10px 0; */
 }

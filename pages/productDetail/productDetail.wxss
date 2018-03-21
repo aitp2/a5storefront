@@ -9,11 +9,11 @@ page {
     padding-bottom: 0;
 }
 .weui-tab__content{
-    padding-top: 12px;
+    /* padding-top: 12px; */
     text-align: left;
 }
 .weui-cells_after-title{
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
 }
 
 .bd_right{
@@ -65,8 +65,12 @@ page {
   width: 100%;
   height: 100%;
 }
-swiper {
+/* swiper {
   height: 750rpx;
+} */
+.slide-image{
+  width:100%;
+  height:150px;
 }
 .slick-slide:after {
   content: '';
@@ -90,7 +94,9 @@ swiper {
   height: auto;
 }
 .goods-detail-section {
+  margin-top:10px;
   background-color: #fff;
+  position:relative;
 }
 .goods-header {
   padding: 20rpx;
@@ -108,9 +114,9 @@ swiper {
 .goods-share .ico-moon {
   font-size: 20px;
 }
-.goods-title{
+/* .goods-title{
   padding: 0 50px 20rpx 0;
-}
+} */
 .goods-price {
   padding: 0 50px 0 0;
 }
@@ -119,6 +125,7 @@ swiper {
 }
 .goods-title {
   font-size: 16px;
+  margin-bottom:7px;
   word-break: break-all;
 }
 .goods-current-price {
@@ -142,7 +149,7 @@ swiper {
   padding: 20rpx 20rpx 30rpx 20rpx;
 }
 .goods-details {
-  padding: 20rpx;
+  /* padding: 20rpx; */
   line-height: 22px;
 }
 .goods-details view {
@@ -590,6 +597,7 @@ contact-button {
 
 /* 修改后样式 */
 .comment-title {
+  text-align: center;
   font-size:28rpx;
   color:#333;
   padding: 20rpx 20rpx 0 20rpx;
@@ -641,8 +649,10 @@ contact-button {
 }
 
 .promotionPrice{
+  color:#999;
+  font-size:12px;
+  margin-left:10px;
 text-decoration:line-through;
-width:200px;
 height:30px;
 line-height:30px;
 }

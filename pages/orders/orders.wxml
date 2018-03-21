@@ -9,7 +9,7 @@
           <view wx:for="{{orders}}" wx:for-item="order" wx:key="order">
             <view class="myOrder-list-wrap">
               <view class="dialog-block-item">
-                <text>{{order.createdDate}}</text>
+                <text style="color:#999">{{order.createdDate}}</text>
                 <text wx:if="{{order.status == 1}}" class="pull-right myOrder-order-status">待付款</text>
                 <text wx:if="{{order.status == 2}}" class="pull-right myOrder-order-status">已取消</text>
                 <text wx:if="{{order.status == 0}}" class="pull-right myOrder-order-status">已完成</text>
@@ -21,7 +21,7 @@
                     <view class="myOrder-goods-title">{{order.wechatOrderItems[0].productName}}</view>
                     <view class="myOrder-goods-right">
                       <view>¥ 
-                        <text class="myOrder-goods-price">{{order.wechatOrderItems[0].price}}</text>
+                        <text class="myOrder-goods-price">{{order.orderAmount || order.wechatOrderItems[0].price}}</text>
                       </view>
                     </view> 
                   </view>

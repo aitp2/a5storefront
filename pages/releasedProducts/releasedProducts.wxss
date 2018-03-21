@@ -143,6 +143,7 @@ page {
   color: #aaa;
   line-height: 30px;
   margin-bottom: 10px;
+  font-size:12px;
 }
 .scrollContainer {
   height: 100%;
