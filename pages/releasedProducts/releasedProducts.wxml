@@ -11,8 +11,8 @@
           <view class="myOrder-goods-list">
             <view>
               <view class="dialog-block-item">
-                <image class="myOrder-goods-cover" src="{{serverurl}}{{product.image}}"></image>
-                <view class="myOrder-goods-title">{{product.name}}</view>
+                <image class="myOrder-goods-cover" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}"></image>
+                <view class="myOrder-goods-title">{{product.productName}}</view>
                 <view class="myOrder-goods-right">
                   <view>
                     ¥

@@ -13,19 +13,17 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    var serverurl_api = wx.getStorageSync("serverurl-api");
     var serverurl = wx.getStorageSync("serverurl");
     var openId = wx.getStorageSync("openId");
     wx.request({
-      url: serverurl + '/getReleasedProducts',
-      data: {
-        'openId': openId
-      },
+      url: serverurl_api + '/api/wechat-products/user/' + wx.getStorageSync("wechatUser").id,
       header: { 'content-type': 'application/x-www-form-urlencoded' },
       success: function (res) {
         var datas = res.data;
         that.setData({
           products: datas,
-          serverurl: serverurl
+          serverurl_api: serverurl_api
         })
       },
       fail: function (res) {
