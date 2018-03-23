@@ -9,7 +9,8 @@
     "pages/account/account",
     "pages/upload/upload",
     "pages/logs/logs",
-    "pages/orderDetail/orderDetail"
+    "pages/orderDetail/orderDetail",
+    "pages/collect/collect"
   ],
   "window": {
     "backgroundTextStyle": "light",
