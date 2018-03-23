@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    serverurl_api: wx.getStorageSync("serverurl-api")    
   },
 
   /**
@@ -13,19 +13,16 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var serverurl = wx.getStorageSync("serverurl");
-    var openId = wx.getStorageSync("openId");
+    var user = wx.getStorageSync("wechatUser");
     wx.request({
-      url: serverurl + '/getReleasedProducts',
-      data: {
-        'openId': openId
+      url: that.data.serverurl_api + '/api/wechat-products/user/' + user.id,
+      data: {        
       },
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
+      header: { 'content-type': 'application/json' },
       success: function (res) {
         var datas = res.data;
         that.setData({
-          products: datas,
-          serverurl: serverurl
+          products: datas          
         })
       },
       fail: function (res) {

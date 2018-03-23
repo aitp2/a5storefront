@@ -6,18 +6,18 @@ Page({
    * 页面的初始数据
    */ 
   data: { 
-    user: wx.getStorageSync("wechatUser")
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */ 
-  onLoad: function (options) {
-    var that = this;
-      this.setData({
-        userInfo: app.globalData.userInfo,
+  onLoad: function (options) {    
+    this.setData({
+        userInfo: app.globalData.userInfo,//微信返回的用户信息
+        user: wx.getStorageSync("wechatUser"),//接口返回当前用户的信息
         openId: wx.getStorageSync("openId")
-      })
+    })
   },
 
   saveUserInfo : function(e){
@@ -44,8 +44,8 @@ Page({
         'wechatCode': wechatCode
       },
       header: { 'content-type': 'application/json' },
-      success:function(res){ 
-        that.data.user=res.data;
+      success:function(res){        
+        wx.setStorageSync("wechatUser", res.data);
         console.log(JSON.stringify(that.data.user));
         wx.switchTab({
           url: "../account/account",
