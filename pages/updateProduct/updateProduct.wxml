@@ -1,42 +1,38 @@
+<!--pages/updateProduct/updateProduct.wxml-->
 <view class="app">
   <view class="ele-container">
-    <form bindsubmit="uploadProduct" class="element form-vessel" style="background-color:rgba(0,0,0,0);opacity:1;margin-left:auto;">      
+    <form bindsubmit="uploadProduct" class="element form-vessel" style="background-color:rgba(0,0,0,0);opacity:1;margin-left:auto;">
 
-    <view class="ele-container">
-    <view class="page__bd">
-        <view class="weui-cells">
+      <view class="ele-container">
+        <view class="page__bd">
+          <view class="weui-cells">
             <view class="weui-cell">
-                <view class="weui-cell__bd">
-                    <view class="weui-uploader">                        
-                        <view class="weui-uploader__bd">
-                            <view class="weui-uploader__files" id="uploaderFiles">
-                                <block wx:for="{{files}}" wx:key="*this">
-                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-                                    </view>
-                                </block>   
-                                
-                            </view>
-                            <view class="weui-uploader__input-box">
-                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
-                            </view>
+              <view class="weui-cell__bd">
+                <view class="weui-uploader">
+                  <view class="weui-uploader__bd">
+                    <view class="weui-uploader__files" id="uploaderFiles">
+                      <block wx:for="{{files}}" wx:key="*this">
+                        <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                          <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
                         </view>
+                      </block>
+
                     </view>
+                    <view class="weui-uploader__input-box">
+                      <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                    </view>
+                  </view>
                 </view>
+              </view>
             </view>
+          </view>
         </view>
-    </view>	
 
       </view>
 
-
-
-
-
-
       <view class="ele-container">
         <view class="element input-ele js-form-ele">
-          <input bindchange="name" placeholder="宝贝名称" type="text" name="name" value="{{name}}">
+          <input bindchange="name" placeholder="宝贝名称" type="text" name="name" value="{{product.productName}}">
           </input>
         </view>
       </view>
@@ -45,19 +41,19 @@
           <!--
           <input bindchange="description" placeholder="宝贝描述" type="text" name="description" value="{{description}}"></input>
           -->
-          <textarea bindblur="description" maxlength="1000" class="weui-textarea" placeholder="宝贝描述" style="padding:0 15px;height: 5.3em;box-sizing:border-box" value='{{description}}' />
-          
+          <textarea bindblur="description" maxlength="1000" class="weui-textarea" placeholder="宝贝描述" style="padding:0 15px;height: 5.3em;box-sizing:border-box" value='{{product.metaDesc}}' />
+
         </view>
       </view>
       <view class="ele-container">
         <view class="element input-ele js-form-ele">
-          <input bindchange="originalPrice" placeholder="宝贝原价" type="digit" name="originalPrice" value="{{originalPrice}}">
+          <input bindchange="originalPrice" placeholder="宝贝原价" type="digit" name="originalPrice" value="{{product.originalPrice}}">
           </input>
         </view>
       </view>
       <view class="ele-container">
         <view class="element input-ele js-form-ele">
-          <input bindchange="price" placeholder="宝贝售价" type="digit" name="price" value="{{price}}">
+          <input bindchange="price" placeholder="宝贝售价" type="digit" name="price" value="{{product.price}}">
           </input>
         </view>
       </view>
@@ -71,14 +67,14 @@
               <view class="select-item">
                 <label class="select-content checkbox">
                   <label class="select-text">是</label>
-                  <radio class="select-input" value="true" checked="true">
+                  <radio class="select-input" value="true" checked="{{product.platformProduct}}">
                   </radio>
                 </label>
               </view>
               <view class="select-item">
                 <label class="select-content checkbox">
                   <label class="select-text">否</label>
-                  <radio class="select-input" value="false">
+                  <radio class="select-input" value="false" checked="{{!product.platformProduct}}">
                   </radio>
                 </label>
               </view>

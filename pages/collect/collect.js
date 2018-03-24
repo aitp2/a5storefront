@@ -5,32 +5,60 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    serverurl_api: wx.getStorageSync("serverurl-api"),
+    'windowHeight': wx.getStorageSync('windowHeight'),
+    products: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    var serverurl_api = wx.getStorageSync("serverurl-api");
-    var serverurl = wx.getStorageSync("serverurl");
-    var openId = wx.getStorageSync("openId");
+    var that = this;  
+    that.load_mine_collect(0);
+  },
+
+
+  load_mine_collect:function(page){
+    var that=this;
     wx.request({
-      url: serverurl_api + '/api/collect-lists/mine/' + wx.getStorageSync("wechatUser").id,
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
+      url: that.data.serverurl_api + '/api/collect-lists/mine/' + wx.getStorageSync("wechatUser").id + '?page=' + page + '&size=6',
+      header: { 'content-type': 'application/json' },
       success: function (res) {
-        var datas = res.data;
-        console.log(JSON.stringify(datas));
+        var dataList = that.data.products;
+        var pageList = res.data.collectProducts;
+        if (!!pageList && pageList.length != 0) {
+          for (var i = 0; i < pageList.length; i++) {
+            dataList.push(pageList[i]);
+          }
+        }
+        var currentPage = 0;   //res.header.currentPage
+        var totalPage = 1;  //res.header.totalPage
         that.setData({
-          products: datas.collectProducts,
-          serverurl_api: serverurl_api
+          products: dataList,
+          'currentPage': currentPage,
+          'totalPage': totalPage
         })
+        if (parseInt(that.data.currentPage) + 1 == parseInt(that.data.totalPage)) {
+          wx.showToast({
+            title: '已经没有更多了',
+            icon: 'success',
+            duration: 1000
+          });
+        }  
       },
       fail: function (res) {
         console.log('error:' + res);
       }
     })
+  },
+
+  loadNextPageProducts: function (e) {
+    var that = this;
+    console.log(e)
+    if (parseInt(that.data.currentPage) + 1 < parseInt(that.data.totalPage)) {
+      that.load_mine_collect(parseInt(that.data.currentPage) + 1);
+    }
   },
 
   /**

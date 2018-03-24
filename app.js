@@ -34,9 +34,19 @@ App({
         }
       }
     })
+
+    wx.getSystemInfo({
+      success: function (res) {
+        var windowHeight = res.windowHeight;
+        console.log('windowHeight: ' + windowHeight);
+        wx.setStorageSync("windowHeight", windowHeight);
+      }
+    })
+
   },
 
   globalData: {
     userInfo: null
   }
+
 })

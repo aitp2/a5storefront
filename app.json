@@ -10,7 +10,8 @@
     "pages/upload/upload",
     "pages/logs/logs",
     "pages/orderDetail/orderDetail",
-    "pages/collect/collect"
+    "pages/collect/collect",
+    "pages/updateProduct/updateProduct"
   ],
   "window": {
     "backgroundTextStyle": "light",

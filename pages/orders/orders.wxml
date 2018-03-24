@@ -4,50 +4,57 @@
   </view>
   <view class="myOrder-content-body lengthOneBody">
     <view class="scrollContainer">
-      <view class="myOrder-all myOrder-content-container myOrder-ebusiness" lower-threshold="10" scroll-y="">
-        <view wx:if="{{orders}}">
-          <view wx:for="{{orders}}" wx:for-item="order" wx:key="order">
-            <view class="myOrder-list-wrap">
-              <view class="dialog-block-item">
-                <text style="color:#999">{{order.createdDate}}</text>
-                <text wx:if="{{order.status == 1}}" class="pull-right myOrder-order-status">待付款</text>
-                <text wx:if="{{order.status == 2}}" class="pull-right myOrder-order-status">已取消</text>
-                <text wx:if="{{order.status == 0}}" class="pull-right myOrder-order-status">已完成</text>
-              </view>  
-              <view class="myOrder-goods-list">
-                <view>
-                  <view class="dialog-block-item">
-                    <image class="myOrder-goods-cover" src="{{serverurl}}{{order.product.image}}"></image>
-                    <view class="myOrder-goods-title">{{order.wechatOrderItems[0].productName}}</view>
-                    <view class="myOrder-goods-right">
-                      <view>¥ 
-                        <text class="myOrder-goods-price">{{order.orderAmount || order.wechatOrderItems[0].price}}</text>
-                      </view>
-                    </view> 
-                  </view>
+      <view class="myOrder-all myOrder-content-container myOrder-ebusiness">
+
+        <scroll-view scroll-y style="height: {{windowHeight}}px;" bindscrolltolower="loadNextPageOrders">
+          <view wx:if="{{orders}}">
+            <view wx:for="{{orders}}" wx:for-item="order" wx:key="order">
+              <view class="myOrder-list-wrap">
+                <view class="dialog-block-item">
+                  <text style="color:#999">{{order.createdDate}}</text>
+                  <text wx:if="{{order.status == 1}}" class="pull-right myOrder-order-status">待付款</text>
+                  <text wx:if="{{order.status == 2}}" class="pull-right myOrder-order-status">已取消</text>
+                  <text wx:if="{{order.status == 0}}" class="pull-right myOrder-order-status">已完成</text>
                 </view>  
-              </view>
-              <view class="dialog-block-item myOrder-total-item">
-                <text>卖方ID：{{order.salerId}}</text>
-              </view>
-              <view class="myOrder-list-bottom">
-                <form bindsubmit="cancelOrder">
-                  <input hidden="true" name="code" type="text" value="{{order.code}}"></input>
-                  <button wx:if="{{order.status == 'NOTPAID'}}" class="btn myOrder-cancel-order" form-type="submit">
-                    取消订单
-                  </button>
-                </form>
-                <form bindsubmit="payOrder">
-                  <input hidden="true" name="code" type="text" value="{{order.code}}"></input>
-                  <button wx:if="{{order.status == 'NOTPAID'}}" class="btn btn-orange myOrder-pay-directly" form-type="submit">
-                    支付
-                  </button>
-                </form>
+                <view class="myOrder-goods-list">
+                  <view>
+                    <view class="dialog-block-item">
+                      <!-- 
+                      <image class="myOrder-goods-cover" src="{{serverurl_api}}/api/image/{{order.wechatOrderItems.product.images[0].imageUrl}}"></image>
+                      -->
+                      <view class="myOrder-goods-title">{{order.wechatOrderItems[0].productName}}</view>
+                      <view class="myOrder-goods-right">
+                        <view> 
+                          ¥<text class="myOrder-goods-price">{{order.orderAmount || order.wechatOrderItems[0].price}}</text>
+                        </view>
+                      </view> 
+                    </view>
+                  </view>  
+                </view>
+                <view class="dialog-block-item myOrder-total-item">
+                  <text>卖方ID：{{order.salerId}}</text>
+                </view>
+                <view class="myOrder-list-bottom">
+                  <form bindsubmit="cancelOrder">
+                    <input hidden="true" name="code" type="text" value="{{order.code}}"></input>
+                    <button wx:if="{{order.status == 'NOTPAID'}}" class="btn myOrder-cancel-order" form-type="submit">
+                      取消订单
+                    </button>
+                  </form>
+                  <form bindsubmit="payOrder">
+                    <input hidden="true" name="code" type="text" value="{{order.code}}"></input>
+                    <button wx:if="{{order.status == 'NOTPAID'}}" class="btn btn-orange myOrder-pay-directly" form-type="submit">
+                      支付
+                    </button>
+                  </form>
+                </view>
               </view>
             </view>
           </view>
-        </view>
+        </scroll-view>
+        <!-- 
         <view class="noMoreNewDataTip">已经没有新数据了</view>
+        -->
       </view>
     </view>
   </view>

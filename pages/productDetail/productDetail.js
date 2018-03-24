@@ -7,6 +7,7 @@ Page({
  */
   data: {
     serverurl_api: wx.getStorageSync("serverurl-api"),
+    productList:[],
     tabs: ["产品详情", "留言信息"],
     activeIndex: 0,
     sliderOffset: 1,
@@ -38,25 +39,49 @@ Page({
     })
   },
   
-  load_relatGoodsList: function (wechatUserId){
+  load_relatGoodsList: function (page,wechatUserId){
     if (!!wechatUserId){
       var that = this;
       wx.request({
         method: "GET",
-        url: that.data.serverurl_api + '/api/wechat-products/user/' + wechatUserId,
+        url: that.data.serverurl_api + '/api/wechat-products/user/' + wechatUserId + '?page=' + page + '&size=6',
         data: {
         },
         header: { 'content-type': 'application/json' },
         success: function (res) {
-          var datas = res.data;
+          var dataList = that.data.productList;
+          var pageList = res.data;
+          if (!!pageList && pageList.length != 0) {
+            for (var i = 0; i < pageList.length; i++) {
+              dataList.push(pageList[i]);
+            }
+          }     
           that.setData({
-            productList: datas
+            productList: dataList,
+            'currentPage': res.header.currentpage,
+            'totalPage': res.header.totalpage
           })
+
+          if (parseInt(that.data.currentPage) + 1 == parseInt(that.data.totalPage)) {
+            wx.showToast({
+              title: '已经没有更多了',
+              icon: 'success',
+              duration: 1000
+            });
+          } 
         },
         fail: function (res) {
           console.log('error:' + res);
         }
       });
+    }
+  },
+
+  loadNextPageProducts: function (e) {
+    var that = this;
+    console.log(e)
+    if (parseInt(that.data.currentPage) + 1 < parseInt(that.data.totalPage)) {
+      that.load_relatGoodsList(parseInt(that.data.currentPage) + 1, that.data.wechatUserId);
     }
   },
 
@@ -153,9 +178,10 @@ Page({
       header: { 'content-type': 'application/x-www-form-urlencoded' },
       success: function (res) {
         var datas = res.data;
-        that.load_relatGoodsList(datas.wechatUserId);
+        that.load_relatGoodsList(0,datas.wechatUserId);
         that.setData({
-          product: datas
+          product: datas,
+          'wechatUserId': datas.wechatUserId
         })
       },
       fail: function (res) {

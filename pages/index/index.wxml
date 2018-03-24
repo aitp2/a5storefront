@@ -1,28 +1,36 @@
 <!--index.wxml-->
 <view class="ele-container">
-  <view class="element goods-list scroll-ele goods-list-mode-1" scroll-top="0" scroll-y="" style="opacity:1;color:rgb(102, 102, 102);font-size:16px;height:auto;margin-left:auto;">
-  <view class="js-list-container">
-  <block wx:if="{{products}}">
-      <block wx:for="{{products}}" wx:for-item="product" wx:key="product">
+  <view class="element goods-list scroll-ele goods-list-mode-1" style="opacity:1;color:rgb(102, 102, 102);font-size:16px;height:auto;margin-left:auto;">
+
+    <scroll-view scroll-y style="height: {{windowHeight}}px;" bindscrolltolower="loadNextPageProducts">
+
+      <view class="js-list-container">
+        <block wx:if="{{products}}">
+          <block wx:for="{{products}}" wx:for-item="product" wx:key="product">
             <view class="goods-list-item background-ele router js-to-detail">
-            <navigator url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}" hover-class="none">
-              <view class="inner-content">                    
-                <image class="list-img" mode="aspectFit" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}"></image>
-                <view class="title-container" style="box-sizing:border-box;padding:0 15px;">
-                  <view class="title">{{product.productName}}</view>
-                  <view>
-                    <text class="goods-current-price">¥{{product.price}}</text>
-                    <text class="promotionPrice">¥{{product.originalPrice}}</text>
-                    <text wx:if="{{product.sellOut == true}}" style="color:red;">\t已售</text>
+              <navigator url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}" hover-class="none">
+                <view class="inner-content">
+                  <image class="list-img" mode="aspectFit" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}"></image>
+                  <view class="title-container" style="box-sizing:border-box;padding:0 15px;">
+                    <view class="title">{{product.productName}}</view>
+                    <view>
+                      <text class="goods-current-price">¥{{product.price}}</text>
+                      <text class="promotionPrice">¥{{product.originalPrice}}</text>
+                      <text wx:if="{{product.sellOut == true}}" style="color:red;">\t已售</text>
+                    </view>
                   </view>
                 </view>
-              </view>
               </navigator>
             </view>
-            
-      </block>
-    </block>
-          </view>
-        
+          </block>
+        </block>
+      </view>
+      
+    </scroll-view>
+
+
+
+
+
   </view>
 </view>

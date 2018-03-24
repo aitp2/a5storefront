@@ -1,36 +1,43 @@
 <view class="myOrder-wrap page" id="myOrder">
   <view class="flex-box myOrder-tab-list">
-    <view class="flex-sub-box-5 active"data-index="0">我发布的</view>
+    <view class="flex-sub-box-5 active" data-index="0">我发布的</view>
   </view>
+  
+  <view class="myOrder-content-body lengthOneBody">
+    <view class="page__bd">
+      <view class="weui-panel weui-panel_access">
 
 
-<view class="myOrder-content-body lengthOneBody">
-<view class="page__bd">
-        <view class="weui-panel weui-panel_access">  
+        <scroll-view scroll-y style="height: {{windowHeight}}px;" bindscrolltolower="loadNextPageProducts">
+          <view class="weui-panel__bd" wx:if="{{products}}">
+            <view class="weui-media-box weui-media-box_appmsg" wx:for="{{products}}" wx:for-item="product" wx:key="product">
+              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" />
+              </view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">{{product.productName}}</view>
+                <view class="weui-media-box__desc" style='text-align:right'>
 
-            <view class="weui-panel__bd" wx:if="{{products}}">
-                <view class="weui-media-box weui-media-box_appmsg" wx:for="{{products}}" wx:for-item="product" wx:key="product">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" />
-                    </view>
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                        <view class="weui-media-box__title">{{product.productName}}</view>
-                        <view class="weui-media-box__desc" style='text-align:right'>
+                  <button class="weui-btn mini-btn" type="primary" size="mini" data-productid="{{product.id}}" bindtap="update_product">修改</button>
 
-                          <button class="weui-btn mini-btn" type="primary" size="mini">修改</button>
-                          <button class="weui-btn mini-btn" type="default" size="mini">下架</button>
-                          <button class="weui-btn mini-btn" type="warn" size="mini">删除</button>
-                        
-                        </view>
-                    </view>
-                </view>                
+                  <button class="weui-btn mini-btn" type="warn" size="mini" wx:if="{{product.goLive==true}}" data-golive="false" data-product="{{product}}" bindtap="update_goLive">下架</button>
+                  <button class="weui-btn mini-btn" type="default" size="mini" wx:if="{{product.goLive==false}}" data-golive="true" data-product="{{product}}" bindtap="update_goLive">上架</button>
+                  <!-- 
+                  <button class="weui-btn mini-btn" type="warn" size="mini">删除</button>
+                  -->
+
+                </view>
+              </view>
             </view>
+          </view>
+        </scroll-view>
 
 
-        </view>
-</view>
-</view>
 
 
+
+      </view>
+    </view>
+  </view>
 
 </view>

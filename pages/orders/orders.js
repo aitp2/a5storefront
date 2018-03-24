@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    'serverurl_api': wx.getStorageSync("serverurl-api"),
+    'windowHeight': wx.getStorageSync('windowHeight'),
+    orders:[]
   },
 
   /**
@@ -15,30 +17,55 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var openId = wx.getStorageSync("openId");
-    var serverurl_api = wx.getStorageSync("serverurl-api");
+    var user = wx.getStorageSync("wechatUser");
+    that.setData({
+      user: user
+    }); 
+    that.load_mine_ordas(0);
+  },
+
+  load_mine_ordas:function(page){
+    var that = this; 
     wx.request({
       method: "GET",
-      url: serverurl_api + '/api/wechat-orders/mine/' + wx.getStorageSync("wechatUser").id,
+      url: that.data.serverurl_api + '/api/wechat-orders/mine/' + that.data.user.id + '?page=' + page + '&size=6',
       data: {
       },
       header: { 'content-type': 'application/json' },
       success: function (res) {
+        var orderList = that.data.orders;
         var datas = res.data;
-        for (var i = 0; i < datas.length; i++) {
-          console.log(datas[i].createdDate);
-          datas[i].createdDate = util.formatTime(datas[i].createdDate);
-
-        }
-        console.log(JSON.stringify(datas));
+        if (!!datas && datas.length!=0){
+          for (var i = 0; i < datas.length; i++) {            
+            datas[i].createdDate = util.formatTime(datas[i].createdDate);
+            orderList.push(datas[i]);
+          }
+        }        
         that.setData({
-          orders: datas
+          orders: orderList,
+          'currentPage': res.header.currentpage,
+          'totalPage': res.header.totalpage
         })
+        if (parseInt(that.data.currentPage) + 1 == parseInt(that.data.totalPage)) {
+          wx.showToast({
+            title: '已经没有更多了',
+            icon: 'success',
+            duration: 1000
+          });
+        } 
       },
       fail: function (res) {
         console.log('error:' + res);
       }
     })
+  },
+
+  loadNextPageOrders: function (e) {
+    var that = this;
+    console.log(e)
+    if (parseInt(that.data.currentPage) + 1 < parseInt(that.data.totalPage)) {
+      that.load_mine_ordas(parseInt(that.data.currentPage) + 1);
+    }
   },
 
   cancelOrder: function (e) {

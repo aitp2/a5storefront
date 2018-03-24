@@ -1,33 +1,42 @@
 <view class="myOrder-wrap page" id="myOrder">
   <view class="flex-box myOrder-tab-list">
-    <view class="flex-sub-box-5 active"data-index="0">我收藏的</view>
+    <view class="flex-sub-box-5 active" data-index="0">我收藏的</view>
   </view>
   <view class="myOrder-content-body lengthOneBody">
     <view class="scrollContainer">
-      <view class="myOrder-all myOrder-content-container myOrder-ebusiness" lower-threshold="10" scroll-y="">
-      <view wx:if="{{products}}">
-      <view wx:for="{{products}}" wx:for-item="product" wx:key="product">
-        <navigator url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}" hover-class="none">
-        <view class="myOrder-list-wrap">
-          <view class="myOrder-goods-list">
-            <view>
-              <view class="dialog-block-item">
-                <image class="myOrder-goods-cover" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}"></image>
-                <view class="myOrder-goods-title">{{product.productName}}</view>
-                <view class="myOrder-goods-right">
-                  <view>
-                    ¥
-                    <text class="myOrder-goods-price">{{product.price}}</text>
+      <view class="myOrder-all myOrder-content-container myOrder-ebusiness">
+
+        <scroll-view scroll-y style="height: {{windowHeight}}px;" bindscrolltolower="loadNextPageProducts">
+          <view wx:if="{{products}}">
+            <view wx:for="{{products}}" wx:for-item="product" wx:key="product">
+              <navigator url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}" hover-class="none">
+                <view class="myOrder-list-wrap">
+                  <view class="myOrder-goods-list">
+                    <view>
+                      <view class="dialog-block-item">
+                        <image class="myOrder-goods-cover" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}"></image>
+                        <view class="myOrder-goods-title">{{product.productName}}</view>
+                        <view class="myOrder-goods-right">
+                          <view>
+                            ¥
+                            <text class="myOrder-goods-price">{{product.price}}</text>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
                   </view>
                 </view>
-              </view>
+              </navigator>
             </view>
+
+
+
+
+
           </view>
-        </view>
-        </navigator>
-        </view>
-        <view class="noMoreNewDataTip">已经没有新数据了</view>
-        </view>
+
+        </scroll-view>
+        
       </view>
     </view>
   </view>
