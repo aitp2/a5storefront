@@ -22,7 +22,7 @@ Page({
   load_mine_collect:function(page){
     var that=this;
     wx.request({
-      url: that.data.serverurl_api + '/api/collect-lists/mine/' + wx.getStorageSync("wechatUser").id + '?page=' + page + '&size=6',
+      url: that.data.serverurl_api + '/api/collect-lists/mine/' + wx.getStorageSync("wechatUser").id + '?page=' + page + '&size=12',
       header: { 'content-type': 'application/json' },
       success: function (res) {
         var dataList = that.data.products;
@@ -39,7 +39,7 @@ Page({
           'currentPage': currentPage,
           'totalPage': totalPage
         })
-        if (parseInt(that.data.currentPage) + 1 == parseInt(that.data.totalPage)) {
+        if (parseInt(that.data.currentPage) + 1 == parseInt(that.data.totalPage) || parseInt(that.data.totalPage) == 0) {
           wx.showToast({
             title: '已经没有更多了',
             icon: 'success',

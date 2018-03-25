@@ -46,7 +46,7 @@ Page({
           'currentPage': res.header.currentpage,
           'totalPage': res.header.totalpage
         })
-        if (parseInt(that.data.currentPage) + 1 == parseInt(that.data.totalPage)) {
+        if (parseInt(that.data.currentPage) + 1 == parseInt(that.data.totalPage) || parseInt(that.data.totalPage)==0) {
           wx.showToast({
             title: '已经没有更多了',
             icon: 'success',

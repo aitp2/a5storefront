@@ -1,38 +1,33 @@
 <view class="app">
-  <view class="ele-container">
-    <form bindsubmit="uploadProduct" class="element form-vessel" style="background-color:rgba(0,0,0,0);opacity:1;margin-left:auto;">      
+  <view class="ele-container" style="padding-bottom: 20px;">
+    <form bindsubmit="uploadProduct" class="element form-vessel" style="background-color:rgba(0,0,0,0);opacity:1;margin-left:auto;">
 
-    <view class="ele-container">
-    <view class="page__bd">
-        <view class="weui-cells">
+      <view class="ele-container">
+        <view class="page__bd">
+          <view class="weui-cells">
             <view class="weui-cell">
-                <view class="weui-cell__bd">
-                    <view class="weui-uploader">                        
-                        <view class="weui-uploader__bd">
-                            <view class="weui-uploader__files" id="uploaderFiles">
-                                <block wx:for="{{files}}" wx:key="*this">
-                                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-                                    </view>
-                                </block>   
-                                
-                            </view>
-                            <view class="weui-uploader__input-box">
-                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
-                            </view>
+              <view class="weui-cell__bd">
+                <view class="weui-uploader">
+                  <view class="weui-uploader__bd">
+                    <view class="weui-uploader__files" id="uploaderFiles">
+                      <block wx:for="{{files}}" wx:key="*this">
+                        <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                          <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
                         </view>
+                      </block>
+
                     </view>
+                    <view class="weui-uploader__input-box">
+                      <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                    </view>
+                  </view>
                 </view>
+              </view>
             </view>
+          </view>
         </view>
-    </view>	
 
       </view>
-
-
-
-
-
 
       <view class="ele-container">
         <view class="element input-ele js-form-ele">
@@ -45,8 +40,8 @@
           <!--
           <input bindchange="description" placeholder="宝贝描述" type="text" name="description" value="{{description}}"></input>
           -->
-          <textarea bindblur="description" maxlength="1000" class="weui-textarea" placeholder="宝贝描述" style="padding:0 15px;height: 5.3em;box-sizing:border-box" value='{{description}}' />
-          
+          <textarea bindblur="description" maxlength="1000" class="weui-textarea" placeholder="宝贝描述" style="padding:0 10px;height: 5.3em;box-sizing:border-box;width:100%;outline:none" value='{{description}}' />
+
         </view>
       </view>
       <view class="ele-container">
@@ -64,7 +59,7 @@
       <view class="ele-container">
         <view class="element select-ele js-form-ele" style="background-color:rgba(0,0,0,0);margin-top:10px;line-height:35px;opacity:1color:rgb(189, 189, 189);font-size:14px;">
           <view class="select-container">
-            <label class="title-container" style="color:rgb(151, 151, 151);font-size:14px;padding:0 15px;background-color:rgb(248, 248, 248);line-height:40px;margin-left:auto;">
+            <label class="title-container" style="color:rgb(151, 151, 151);font-size:14px;padding:0 15px;background-color:rgb(248, 248, 248);line-height:40px;margin-left:auto;width:92%;">
               <text>是否实物</text>
             </label>
             <radio-group bindchange="platformProduct" class="radio-group">

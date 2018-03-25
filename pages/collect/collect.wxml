@@ -9,7 +9,8 @@
         <scroll-view scroll-y style="height: {{windowHeight}}px;" bindscrolltolower="loadNextPageProducts">
           <view wx:if="{{products}}">
             <view wx:for="{{products}}" wx:for-item="product" wx:key="product">
-              <navigator url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}" hover-class="none">
+
+              <navigator wx:if="{{product.goLive}}" url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}" hover-class="none">
                 <view class="myOrder-list-wrap">
                   <view class="myOrder-goods-list">
                     <view>
@@ -27,16 +28,34 @@
                   </view>
                 </view>
               </navigator>
+              <navigator wx:else url="" hover-class="none">
+                <view class="myOrder-list-wrap">
+                  <view class="myOrder-goods-list">
+                    <view>
+                      <view class="dialog-block-item">
+                        <image class="myOrder-goods-cover" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}"></image>
+                        <view class="myOrder-goods-title">{{product.productName}}</view>
+                        <view class="myOrder-goods-right">
+                          <view>
+                            ¥
+                            <text class="myOrder-goods-price">{{product.price}}</text>
+                          </view>
+                          <view>
+                            <text style='color:red'>已下架</text>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </navigator>
+
             </view>
-
-
-
-
 
           </view>
 
         </scroll-view>
-        
+
       </view>
     </view>
   </view>
