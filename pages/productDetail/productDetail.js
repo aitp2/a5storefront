@@ -15,7 +15,8 @@ Page({
     autoplay: true,
     interval: 5000,
     duration: 1000,
-    disabledBuy: false
+    disabledBuy: false,
+    hidden_load_more_message:true
   },
 
   load_message_list: function () {
@@ -63,11 +64,9 @@ Page({
           })
 
           if (parseInt(that.data.currentPage) + 1 == parseInt(that.data.totalPage) || parseInt(that.data.totalPage) == 0) {
-            wx.showToast({
-              title: '已经没有更多了',
-              icon: 'success',
-              duration: 1000
-            });
+            that.setData({
+              hidden_load_more_message: false             
+            })
           } 
         },
         fail: function (res) {

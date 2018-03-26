@@ -134,17 +134,11 @@
                   </view>
                 </navigator>
               </view>
-            </scroll-view>
 
+              <view hidden='{{hidden_load_more_message}}' class="weui-msg__desc" style='text-align:center;font-size:16px;padding:15px;'><icon type="success" size="20"></icon>已经被掏空</view>
 
-            <!-- 
-                <view class="weui-panel__ft">
-                  <view class="weui-cell weui-cell_access weui-cell_link">
-                    <view class="weui-cell__bd bd_right">查看更多</view>
-                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                  </view>
-                </view>
-                -->
+            </scroll-view>              
+                
 
           </view>
         </view>
