@@ -50,11 +50,20 @@ Page({
       },
       header: { 'content-type': 'application/json' },
       success: function (res) {        
+        var dataList = that.data.products;
+        var pageList = res.data;
+        if (!!pageList && pageList.length!=0){
+          for (var i = 0; i < pageList.length; i++) {
+            dataList.push(pageList[i]);
+          } 
+        }           
+
         that.setData({
-          products: that.data.products.concat(res.data),
-          'currentPage': res.header.currentPage,
-          'totalPage': res.header.totalPage
+          products: dataList,
+          'currentPage': res.header.currentpage,
+          'totalPage': res.header.totalpage
         })
+
         if (parseInt(that.data.currentPage) + 1 == parseInt(that.data.totalPage) || parseInt(that.data.totalPage) == 0) {
           wx.showToast({
             title: '已经没有更多了',
