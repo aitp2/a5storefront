@@ -37,7 +37,7 @@ App({
 
     wx.getSystemInfo({
       success: function (res) {
-        var windowHeight = res.windowHeight;
+        var windowHeight = res.windowHeight-20; 
         console.log('windowHeight: ' + windowHeight);
         wx.setStorageSync("windowHeight", windowHeight);
       }

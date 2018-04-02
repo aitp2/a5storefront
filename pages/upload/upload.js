@@ -82,6 +82,15 @@ Page({
   },
 
   uploadProduct: function (e) {
+
+    wx.showToast({
+      title: '抱歉！暂未开放！',
+      icon: 'success',
+      duration: 1000
+    })
+    return;
+
+
     var that = this;
     var wechatUserId = wx.getStorageSync("wechatUser").id;
     var serverurl = wx.getStorageSync("serverurl");
