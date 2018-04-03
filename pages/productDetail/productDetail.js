@@ -328,10 +328,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var that=this;
     return {
       title: '产品分享',
       desc: '',
-      path: '/page/productDetail?id=123'
+      path: 'pages/productDetail/productDetail?productId=' + that.data.productId + '&wechatUserId=' + that.data.wechatUserId
     }
   }
 })

@@ -100,10 +100,6 @@ Page({
    */
   onShow: function () {
     var that = this;
-    that.setData({
-      products: []
-    });
-    that.loadProductList(0);
     var serverurl = wx.getStorageSync("serverurl");
     var serverurl_api = wx.getStorageSync("serverurl-api");
     wx.login({
@@ -136,7 +132,7 @@ Page({
   loadNextPageProducts:function(e){
     var that=this;
     console.log(e)
-    if (parseInt(that.data.currentPage)+1 < parseInt(that.data.totalPage)){
+    if (parseInt(that.data.currentPage) + 1 < parseInt(that.data.totalPage)){
       that.loadProductList(parseInt(that.data.currentPage) + 1);
     }    
   }
