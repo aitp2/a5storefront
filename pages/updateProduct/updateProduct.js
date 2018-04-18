@@ -8,6 +8,7 @@ Page({
   data: {
     files: [],
     serverurl_api: wx.getStorageSync("serverurl-api"),
+    serverurl_img: wx.getStorageSync("serverurl-img")
   },
 
   chooseImage: function (e) {

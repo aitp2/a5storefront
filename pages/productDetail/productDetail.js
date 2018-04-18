@@ -7,6 +7,7 @@ Page({
  */
   data: {
     serverurl_api: wx.getStorageSync("serverurl-api"),
+    serverurl_img: wx.getStorageSync("serverurl-img"),
     productList:[],
     tabs: ["产品详情", "留言信息"],
     activeIndex: 0,
@@ -40,12 +41,12 @@ Page({
     })
   },
   
-  load_relatGoodsList: function (page,wechatUserId){
-    if (!!wechatUserId){
+  load_relatGoodsList: function (page, salerId){
+    if (!!salerId){
       var that = this;
       wx.request({
         method: "GET",
-        url: that.data.serverurl_api + '/api/wechat-products/user/' + wechatUserId + '?page=' + page + '&size=6',
+        url: that.data.serverurl_api + '/api/wechat-products/user/' + salerId + '?page=' + page + '&size=6',
         data: {
         },
         header: { 'content-type': 'application/json' },
@@ -80,7 +81,7 @@ Page({
     var that = this;
     console.log(e)
     if (parseInt(that.data.currentPage) + 1 < parseInt(that.data.totalPage)) {
-      that.load_relatGoodsList(parseInt(that.data.currentPage) + 1, that.data.wechatUserId);
+      that.load_relatGoodsList(parseInt(that.data.currentPage) + 1, that.data.salerId);
     }
   },
 
@@ -180,7 +181,7 @@ Page({
         that.load_relatGoodsList(0,datas.wechatUserId);
         that.setData({
           product: datas,
-          'wechatUserId': datas.wechatUserId
+         'salerId': datas.wechatUserId
         })
       },
       fail: function (res) {

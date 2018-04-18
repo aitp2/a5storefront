@@ -7,6 +7,7 @@ App({
     wx.setStorageSync('logs', logs)
     wx.setStorageSync("serverurl", "https://www.transa5.tech")
     wx.setStorageSync("serverurl-api", "https://demoapi.transa5.tech")
+    wx.setStorageSync("serverurl-img", "https://img.aitpgroup.tech")
     // 获取用户信息
     wx.getSetting({
       success: res => {

@@ -41,7 +41,7 @@
                     <view class="weui-uploader__files">
                       <block wx:for="{{product.images}}" wx:for-item="image" wx:key="image">
                         <view class="weui-uploader__file">
-                          <image class="weui-uploader__img" src="{{serverurl_api}}/api/image/{{image.imageUrl}}" mode="aspectFill" />
+                          <image class="weui-uploader__img" src="{{serverurl_img}}/{{image.imageUrl}}" mode="aspectFill" />
                         </view>
                       </block>
                     </view>                   

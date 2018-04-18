@@ -6,6 +6,7 @@ Page({
    */
   data: {
     serverurl_api: wx.getStorageSync("serverurl-api"),
+    serverurl_img: wx.getStorageSync("serverurl-img"),
     'windowHeight': wx.getStorageSync('windowHeight'),
     products: []
   },

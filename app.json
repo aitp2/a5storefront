@@ -31,12 +31,7 @@
         "text": "首页",
         "pagePath": "pages/index/index"
       },
-      {
-        "iconPath": "images/5a61bd58e23ad.png",
-        "selectedIconPath": "images/5a61bd58e240b.png",
-        "text": "发布",
-        "pagePath": "pages/upload/upload"
-      },
+
       {
         "iconPath": "images/5a61bd590f007.png",
         "selectedIconPath": "images/5a61bd590f07c.png",

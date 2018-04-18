@@ -4,7 +4,7 @@
 
       <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
         <swiper-item wx:for="{{product.images}}">
-          <image src="{{serverurl_api}}/api/image/{{item.imageUrl}}" mode="aspectFit" class="slide-image" />
+          <image src="{{serverurl_img}}/{{item.imageUrl}}" mode="aspectFit" class="slide-image" />
         </swiper-item>
       </swiper>
 
@@ -55,7 +55,7 @@
                   <view class="goods-details">
                     <view style="padding:10px;color:#333;font-size:14px">{{product.metaDesc}}</view>
                     <block wx:for="{{product.images}}">
-                      <image src="{{serverurl_api}}/api/image/{{item.imageUrl}}" mode="aspectFit" class="slide-image" />
+                      <image src="{{serverurl_img}}/{{item.imageUrl}}" mode="aspectFit" class="slide-image" />
                     </block>
                   </view>
                 </view>
@@ -126,7 +126,7 @@
               <view class="weui-panel__bd" wx:if="{{productList}}">
                 <navigator wx:for="{{productList}}" wx:for-item="product" wx:key="product" url="../productDetail/productDetail?productId={{product.id}}&wechatUserId={{product.wechatUserId}}" class="weui-media-box_appmsg" hover-class="weui-cell_active" style="width:50%;box-sizing:border-box;display:inline-block;padding:0;">
                   <view style="height:140px;">
-                    <image class="weui-media-box__thumb" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" mode="aspectFit"></image>
+                    <image class="weui-media-box__thumb" src="{{serverurl_img}}/{{product.images[0].imageUrl}}" mode="aspectFit"></image>
                   </view>
                   <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" style="margin:0 10px;">
                     <view class="weui-media-box__title" style="font-size:14px;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{product.productName}}</view>

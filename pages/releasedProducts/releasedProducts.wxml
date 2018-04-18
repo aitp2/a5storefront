@@ -12,7 +12,7 @@
           <view class="weui-panel__bd" wx:if="{{products}}">
             <view class="weui-media-box weui-media-box_appmsg" wx:for="{{products}}" wx:for-item="product" wx:key="product">
               <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                <image class="weui-media-box__thumb" src="{{serverurl_api}}/api/image/{{product.images[0].imageUrl}}" />
+                <image class="weui-media-box__thumb" src="{{serverurl_img}}/{{product.images[0].imageUrl}}" />
               </view>
               <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                 <view class="weui-media-box__title">{{product.productName}}</view>
@@ -31,10 +31,6 @@
             </view>
           </view>
         </scroll-view>
-
-
-
-
 
       </view>
     </view>
